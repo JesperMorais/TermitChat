@@ -1,7 +1,8 @@
 # CHANGE
 
-CMakeLists.txt
+###CMakeLists.txt
 
+```
 cmake_minimum_required(VERSION 3.15)
 set(CMAKE_TOOLCHAIN_FILE "****D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake****" CACHE STRING "") // CHANGE THISSS TO YOUR PATH
 project(TermitChat)
@@ -15,3 +16,4 @@ set(ftxui_DIR "****D:/dev/vcpkg/installed/x64-windows/share/ftxui****") //CHANGE
 find_package(ftxui CONFIG REQUIRED)
 
 target_link_libraries(TermitChat PRIVATE ftxui::screen ftxui::dom ftxui::component)
+```
