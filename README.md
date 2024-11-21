@@ -1,4 +1,5 @@
-
+#Project info
+This project aims to make a fully terminal driven chat written in c++ using ftxui
 
 # FOR DEVS - HOW TO BUILD PROJECT
 
