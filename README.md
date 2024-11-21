@@ -1,8 +1,8 @@
 # CHANGE
 
-To build Build map: Root/ cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake   *** CHANGE TO YOUR PATH
+To build Build map: Root/ *cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake*   *** CHANGE TO YOUR PATH
 
-To compile main.cpp: Root/ cmake --build build
+To compile main.cpp: Root/ *cmake --build build*
 
 
 
