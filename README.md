@@ -3,12 +3,6 @@ This project aims to make a fully terminal driven chat written in c++ using ftxu
 
 # FOR DEVS - HOW TO BUILD PROJECT
 
-To build Build map: Root/ *"cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"*   *** CHANGE TO YOUR PATH
-
-To compile main.cpp: Root/ *"cmake --build build"*
-
-
-
 ## CMakeLists.txt
 
 ```
@@ -26,3 +20,9 @@ find_package(ftxui CONFIG REQUIRED)
 
 target_link_libraries(TermitChat PRIVATE ftxui::screen ftxui::dom ftxui::component)
 ```
+
+To build Build map: Root/ *"cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"*   *** CHANGE TO YOUR PATH
+
+To compile main.cpp: Root/ *"cmake --build build"*
+
+to build do ./build/debug/termitchat
