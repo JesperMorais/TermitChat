@@ -1,4 +1,6 @@
-# CHANGE
+
+
+# FOR DEVS - HOW TO BUILD PROJECT
 
 To build Build map: Root/ *cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake*   *** CHANGE TO YOUR PATH
 
