@@ -14,14 +14,14 @@ auto main() -> int
 { 
     //Startar en separat terminal vid körning
     if (getenv("IN_NEW_TERMINAL") == nullptr) {
-        // Relaunch the program in a new terminal
         std::string command = "start cmd.exe /k \"set IN_NEW_TERMINAL=1 && build\\debug\\termitchat\"";
         std::system(command.c_str());
         return 0;
     }
+
   using namespace ftxui;
   
-  auto screen = ScreenInteractive::TerminalOutput();
+  auto screen = ScreenInteractive::Fullscreen();
 
   string username;
   string password;
@@ -35,7 +35,8 @@ auto main() -> int
   auto render2 = Renderer([&]{
     return vbox({
       hbox(text(" TEST")),
-           }); });
+           }); 
+  });
 
   auto on_confim = [&]
   { 
@@ -51,6 +52,7 @@ auto main() -> int
       input_password,
       confirm_button,
   });
+
 
   auto render = Renderer(component, [&]{ 
     return vbox({
