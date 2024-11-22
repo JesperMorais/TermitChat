@@ -24,15 +24,14 @@ auto main() -> int
   password_option.password = true;
   Component input_password = Input(&password, "password", password_option);
 
-  auto render2 = Renderer([&]
-                          { return vbox({
-                                hbox(text(" TEST")),
-                            }); });
+  auto render2 = Renderer([&]{
+    return vbox({
+      hbox(text(" TEST")),
+           }); });
 
   auto on_confim = [&]
-  {
-    if (password.empty() == false)
-    {
+  { 
+    if (password.empty() == false){ 
       screen.Loop(render2);
     }
   };
@@ -45,15 +44,15 @@ auto main() -> int
       confirm_button,
   });
 
-  auto render = Renderer(component, [&]
-                         { return vbox({
-                                      hbox(text(" First name : "), input_user_name->Render()),
-                                      hbox(text(" Password : "), input_password->Render()),
-                                      confirm_button->Render(),
-                                      separator(),
-                                      text("hello " + username + ", your password is: " + password),
-                                  }) |
-                                  border; });
+  auto render = Renderer(component, [&]{ 
+    return vbox({
+      hbox(text(" First name : "), input_user_name->Render()),
+      hbox(text(" Password : "), input_password->Render()),
+      confirm_button->Render(),
+      separator(),
+      text("hello " + username + ", your password is: " + password),
+      }) |
+       border; });
 
   screen.Loop(render);
   return 0;
