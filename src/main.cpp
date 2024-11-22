@@ -3,7 +3,7 @@
 #include <ftxui/dom/elements.hpp>
 #include "ftxui/dom/node.hpp"      // for Render
 #include "ftxui/screen/color.hpp"  // for ftxui
-
+#include <cstdlib>
 #include <string>
 #include <vector>
 
@@ -11,8 +11,16 @@ using namespace ftxui;
 using namespace std;
 
 auto main() -> int
-{
+{ 
+    //Startar en separat terminal vid körning
+    if (getenv("IN_NEW_TERMINAL") == nullptr) {
+        // Relaunch the program in a new terminal
+        std::string command = "start cmd.exe /k \"set IN_NEW_TERMINAL=1 && build\\debug\\termitchat\"";
+        std::system(command.c_str());
+        return 0;
+    }
   using namespace ftxui;
+  
   auto screen = ScreenInteractive::TerminalOutput();
 
   string username;
