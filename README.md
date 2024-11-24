@@ -19,7 +19,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(TermitChat src/main.cpp)
 
 # Include the vcpkg toolchain (optional to pass externally)
-set(CMAKE_TOOLCHAIN_FILE "D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")  #736
+set(CMAKE_TOOLCHAIN_FILE "D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "") 
 
 find_package(asio CONFIG REQUIRED)
 find_package(ftxui CONFIG REQUIRED)
