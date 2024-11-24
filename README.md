@@ -55,13 +55,15 @@ target_link_libraries(client PRIVATE asio)
 
 To build Build map: Root/ *"cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"*   *** CHANGE TO YOUR PATH
 
-To compile main.cpp: Root/ *"cmake --build build"*
+To compile The whole project Root/ *"cmake --build build"*
 
-to build specific part: 
+to run specific part: 
 
 Server: ./build/server/debug/server
 
 Client: ./build/client/debug/client
+
+TODO: ADD BETTER/EASIER WAY TO RUN EACH
 
 ### DEBUG / BUILD ISSUES
 
