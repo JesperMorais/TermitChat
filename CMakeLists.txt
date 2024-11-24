@@ -21,16 +21,3 @@ find_package(ftxui CONFIG REQUIRED)
 # Define _WIN32_WINNT globally for Asio
 add_compile_definitions(_WIN32_WINNT=0x0A00)
 
-add_custom_target(run_client
-    COMMAND ${CMAKE_COMMAND} -E echo "Running Client..."
-    COMMAND $<TARGET_FILE:client>
-    DEPENDS client
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/client
-)
-
-add_custom_target(run_server
-    COMMAND ${CMAKE_COMMAND} -E echo "Running Server..."
-    COMMAND $<TARGET_FILE:server>
-    DEPENDS server
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/server
-)
