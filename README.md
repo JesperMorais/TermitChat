@@ -4,8 +4,8 @@ This project aims to make a fully terminal driven chat written in c++ using ftxu
 ## FOR DEVS - HOW TO BUILD PROJECT
 
 # ADD CMakeLists.txt in:
-**```client/```**
-**```server/```**
+```client/```
+```server/```
 
 
 
