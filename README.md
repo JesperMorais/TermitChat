@@ -1,10 +1,10 @@
 # Project info
 This project aims to make a fully terminal driven chat written in c++ using ftxui
 
-# FOR DEVS - HOW TO BUILD PROJECT
+## FOR DEVS - HOW TO BUILD PROJECT
 
 Change the CMakeList.txt to the one below.
-*NOTE* CHANGE the PATHS to YOUR vcpkg dir.
+**NOTE** CHANGE the PATHS to YOUR vcpkg dir.
 
 ## CMakeLists.txt
 
@@ -19,7 +19,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(TermitChat src/main.cpp)
 
 # Include the vcpkg toolchain (optional to pass externally)
-set(CMAKE_TOOLCHAIN_FILE "D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "") 
+set(CMAKE_TOOLCHAIN_FILE "D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")  #736
 
 find_package(asio CONFIG REQUIRED)
 find_package(ftxui CONFIG REQUIRED)
