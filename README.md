@@ -42,7 +42,7 @@ add_compile_definitions(_WIN32_WINNT=0x0A00)
 
 ## Server / Client CMakeLists.txt
 **CHANGE PATHS AS NEEDED**
-**CHANGE Client -> Server If its in your server folder**
+**THIS IS A CLIENT EXAMPLE**
 ```
 # Add the executable
 add_executable(client src/client_main.cpp)
