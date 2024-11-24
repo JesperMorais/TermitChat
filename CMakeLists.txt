@@ -1,13 +1,36 @@
 cmake_minimum_required(VERSION 3.15)
+
+# Set the vcpkg toolchain file BEFORE project()
 set(CMAKE_TOOLCHAIN_FILE "D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
+
+# Define the project
 project(TermitChat)
 
+# Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(TermitChat src/main.cpp)
+# Add subdirectories for client and server
+add_subdirectory(client)
+add_subdirectory(server)
 
-set(ftxui_DIR "D:/dev/vcpkg/installed/x64-windows/share/ftxui")
+# Global dependencies (optional: could move to specific CMakeLists.txt files)
+find_package(asio CONFIG REQUIRED)
 find_package(ftxui CONFIG REQUIRED)
 
-target_link_libraries(TermitChat PRIVATE ftxui::screen ftxui::dom ftxui::component)
+# Define _WIN32_WINNT globally for Asio
+add_compile_definitions(_WIN32_WINNT=0x0A00)
+
+add_custom_target(run_client
+    COMMAND ${CMAKE_COMMAND} -E echo "Running Client..."
+    COMMAND $<TARGET_FILE:client>
+    DEPENDS client
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/client
+)
+
+add_custom_target(run_server
+    COMMAND ${CMAKE_COMMAND} -E echo "Running Server..."
+    COMMAND $<TARGET_FILE:server>
+    DEPENDS server
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/server
+)
