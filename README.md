@@ -36,3 +36,7 @@ To build Build map: Root/ *"cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=D:/dev/vc
 To compile main.cpp: Root/ *"cmake --build build"*
 
 to build do ./build/debug/termitchat
+
+### DEBUG / BUILD ISSUES
+
+1. Normal Issue can be fixed with removal of BUILD map and rebuild project.
