@@ -3,6 +3,9 @@ This project aims to make a fully terminal driven chat written in c++ using ftxu
 
 # FOR DEVS - HOW TO BUILD PROJECT
 
+Change the CMakeList.txt to the one below.
+*NOTE* CHANGE the PATHS to YOUR vcpkg dir.
+
 ## CMakeLists.txt
 
 ```
