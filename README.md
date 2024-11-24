@@ -1,41 +1,71 @@
 # Project info
-This project aims to make a fully terminal driven chat written in c++ using ftxui
+This project aims to make a fully terminal driven chat written in c++.
+
+Using ftxui for Terminal UX and Asio for network.
 
 ## FOR DEVS - HOW TO BUILD PROJECT
+
+# ADD CMakeLists.txt in:
+```client/```
+
+```server/```
+
+
 
 Change the CMakeList.txt to the one below.
 **NOTE** CHANGE the PATHS to YOUR vcpkg dir.
 
-## CMakeLists.txt
+##  ROOT CMakeLists.txt
 
 ```
 cmake_minimum_required(VERSION 3.15)
 
+# Set the vcpkg toolchain file BEFORE project()
+set(CMAKE_TOOLCHAIN_FILE "D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
+
+# Define the project
 project(TermitChat)
 
+# Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(TermitChat src/main.cpp)
+# Add subdirectories for client and server
+add_subdirectory(client)
+add_subdirectory(server)
 
-# Include the vcpkg toolchain (optional to pass externally)
-set(CMAKE_TOOLCHAIN_FILE "D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "") 
-
+# Global dependencies (optional: could move to specific CMakeLists.txt files)
 find_package(asio CONFIG REQUIRED)
 find_package(ftxui CONFIG REQUIRED)
 
-target_link_libraries(TermitChat PRIVATE ftxui::screen ftxui::dom ftxui::component asio)
+# Define _WIN32_WINNT globally for Asio
+add_compile_definitions(_WIN32_WINNT=0x0A00)
+```
 
-# Define _WIN32_WINNT for Windows 10/11 FOR ASIO
-target_compile_definitions(TermitChat PRIVATE _WIN32_WINNT=0x0A00)
+## Server / Client CMakeLists.txt
+**CHANGE PATHS AS NEEDED**
 
+**THIS IS A CLIENT EXAMPLE**
+```
+# Add the executable
+add_executable(client src/client_main.cpp)
+
+# Include Asio headers
+find_package(asio CONFIG REQUIRED) # Works if vcpkg toolchain is active
+target_link_libraries(client PRIVATE asio)
 ```
 
 To build Build map: Root/ *"cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"*   *** CHANGE TO YOUR PATH
 
-To compile main.cpp: Root/ *"cmake --build build"*
+To compile The whole project Root/ *"cmake --build build"*
 
-to build do ./build/debug/termitchat
+to run specific part: 
+
+Server: ./build/server/debug/server
+
+Client: ./build/client/debug/client
+
+TODO: ADD BETTER/EASIER WAY TO RUN EACH
 
 ### DEBUG / BUILD ISSUES
 
