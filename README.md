@@ -39,4 +39,4 @@ to build do ./build/debug/termitchat
 
 ### DEBUG / BUILD ISSUES
 
-1. Normal Issue can be fixed with removal of BUILD map and rebuild project.
+1. Normal Issues can be fixed with removal of BUILD map and rebuild project.
