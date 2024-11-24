@@ -1,5 +1,5 @@
 # Project info
-This project aims to make a fully terminal driven chat written in c++ using ftxui
+This project aims to make a fully terminal driven chat written in c++ using ftxui and asio for network
 
 ## FOR DEVS - HOW TO BUILD PROJECT
 
