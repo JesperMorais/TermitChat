@@ -70,3 +70,7 @@ TODO: ADD BETTER/EASIER WAY TO RUN EACH
 ### DEBUG / BUILD ISSUES
 
 1. Normal Issues can be fixed with removal of BUILD map and rebuild project.
+
+
+### KNOWN ISSUES
+1. Opening the project and trying to build provides error. Fixed by rebuildning the build map
