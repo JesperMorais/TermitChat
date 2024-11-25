@@ -12,7 +12,6 @@ using namespace std;
 
 string input_content;
 string recv_data;
-string cannotSendData;
 bool isClientConnected = false;
 mutex data_mutex;
 queue<string> message_queue;
@@ -115,6 +114,7 @@ int main() {
     auto screen = ScreenInteractive::TerminalOutput();
 
     auto input_box = Input(&input_content, "Skriv ditt meddelande...");
+
     auto send_button = Button("Skicka", [&] {
         if (!input_content.empty()) {
             {
@@ -123,9 +123,9 @@ int main() {
             }
             input_content = ""; // Clear input box
         } else {
-            cannotSendData = "Input is empty";
+            add_debug_message("Cannot send empty message");
         }
-    });
+    }) | color(Color::Wheat1) | bold | border | bgcolor(Color::Black);
 
     auto container = Container::Vertical({
         send_button,
@@ -138,18 +138,20 @@ auto renderer = Renderer(container, [&] {
         std::lock_guard<std::mutex> lock(debug_mutex);
         for (const auto& msg : debug_messages) {
             debug_elements.push_back(text(msg) | color(Color::Yellow));
-        }
     }
+        }
     // Return the UI layout (rebuilt completely on each render)
     return vbox({
-        text("TermitChat") | bold | borderStyled(Color::BlueViolet) | color(Color::Green3Bis), // Single Header
+        text("TermitChat") | bold | borderStyled(Color::BlueViolet) | color(Color::Green3Bis) | center | flex | blink, // Single Header
         separator(),
         text("Received: " + recv_data) | dim,                        // Received data
         separator(),                       // Display the message queue
         container->Render(),
         separator(),
-        text("Debug Messages:") | bold | color(Color::Red),          // Debug Header
-        vbox(debug_elements) | border,                              // Debug message panel                                         // Input box and send button
+        vbox({
+            text("Debug Messages:") | bold | color(Color::Red),          // Debug Header
+            vbox(debug_elements) | border,                              // Debug message panel                                         // Input box and send button
+        }) | border,
     });
 });
 
