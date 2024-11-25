@@ -17,6 +17,22 @@ bool isClientConnected = false;
 mutex data_mutex;
 queue<string> message_queue;
 
+vector<string> debug_messages;
+mutex debug_mutex;
+
+//You can't just cout debug log with ftxui so we need a new way
+//We there for add all debug messages to a vector 
+void add_debug_message(const string& message) {
+    lock_guard<std::mutex> lock(debug_mutex);
+    debug_messages.push_back(message);
+
+    // Keep only the last 10 messages
+    if (debug_messages.size() > 10) {
+        debug_messages.erase(debug_messages.begin());
+    }
+}
+
+
 void handle_client(tcp::socket& socket){
     //ta emot medelanden
     //skicka medelande i loop ta emot från kö
@@ -28,7 +44,7 @@ void handle_client(tcp::socket& socket){
         size_t length = socket.read_some(asio::buffer(data), error);
         
         if (error == asio::error::eof) {
-            //std::cout << "Client disconnected during handshake." << std::endl;
+            add_debug_message("Client disconnected during handshake.");
             return;
         }
         if (error) {
@@ -39,9 +55,10 @@ void handle_client(tcp::socket& socket){
         if(recv_data != recv_message){
             recv_data = recv_message;
         }
-        //cout << "recv data from client : " << recv_message << endl;
 
-        //cout << "Entering write loop" << endl;
+        add_debug_message("recv data from client :" + recv_message);
+        add_debug_message("Entering write loop");
+
 
         while(true){
             string message; // gonna hold the send message
@@ -58,7 +75,7 @@ void handle_client(tcp::socket& socket){
                 if(error){
                     throw asio::system_error(error);
                 }
-                //cout << "send message to client: " << message << endl;
+                add_debug_message("send message to client: " + message);
             } 
             this_thread::sleep_for(chrono::milliseconds(100));
         }
@@ -75,14 +92,14 @@ void asio_task() {
         try{
 
         tcp::socket socket(io_context);
-        //cout << "Wating for client to connect" << endl;
+        add_debug_message("Wating for client to connect");
         acceptor.accept(socket);
-        //cout << "Client connected!" << endl;
+        add_debug_message("Client connected!");
 
         handle_client(socket);
         }catch(std::exception& e){
             cerr << "Server error: " << e.what() << std::endl;
-            //cout << "Retrying connection in 5 seconds..." << std::endl;
+            add_debug_message("Retrying connection in 5 seconds...");
             this_thread::sleep_for(std::chrono::seconds(5));
         }     
     }
@@ -116,13 +133,23 @@ int main() {
     });
 
 auto renderer = Renderer(container, [&] {
+    std::vector<Element> debug_elements;
+    {
+        std::lock_guard<std::mutex> lock(debug_mutex);
+        for (const auto& msg : debug_messages) {
+            debug_elements.push_back(text(msg) | color(Color::Yellow));
+        }
+    }
     // Return the UI layout (rebuilt completely on each render)
     return vbox({
         text("TermitChat") | bold | borderStyled(Color::BlueViolet) | color(Color::Green3Bis), // Single Header
         separator(),
         text("Received: " + recv_data) | dim,                        // Received data
         separator(),                       // Display the message queue
-        container->Render(),                                         // Input box and send button
+        container->Render(),
+        separator(),
+        text("Debug Messages:") | bold | color(Color::Red),          // Debug Header
+        vbox(debug_elements) | border,                              // Debug message panel                                         // Input box and send button
     });
 });
 
