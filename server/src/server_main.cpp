@@ -28,7 +28,7 @@ void handle_client(tcp::socket& socket){
         size_t length = socket.read_some(asio::buffer(data), error);
         
         if (error == asio::error::eof) {
-            std::cout << "Client disconnected during handshake." << std::endl;
+            //std::cout << "Client disconnected during handshake." << std::endl;
             return;
         }
         if (error) {
@@ -36,9 +36,12 @@ void handle_client(tcp::socket& socket){
         }
 
         string recv_message(data, length);
-        cout << "recv data from client : " << recv_message << endl;
+        if(recv_data != recv_message){
+            recv_data = recv_message;
+        }
+        //cout << "recv data from client : " << recv_message << endl;
 
-        cout << "Entering write loop" << endl;
+        //cout << "Entering write loop" << endl;
 
         while(true){
             string message; // gonna hold the send message
@@ -55,7 +58,7 @@ void handle_client(tcp::socket& socket){
                 if(error){
                     throw asio::system_error(error);
                 }
-                cout << "send message to client: " << message << endl;
+                //cout << "send message to client: " << message << endl;
             } 
             this_thread::sleep_for(chrono::milliseconds(100));
         }
@@ -72,14 +75,14 @@ void asio_task() {
         try{
 
         tcp::socket socket(io_context);
-        cout << "Wating for client to connect" << endl;
+        //cout << "Wating for client to connect" << endl;
         acceptor.accept(socket);
-        cout << "Client connected!" << endl;
+        //cout << "Client connected!" << endl;
 
         handle_client(socket);
         }catch(std::exception& e){
             cerr << "Server error: " << e.what() << std::endl;
-            cout << "Retrying connection in 5 seconds..." << std::endl;
+            //cout << "Retrying connection in 5 seconds..." << std::endl;
             this_thread::sleep_for(std::chrono::seconds(5));
         }     
     }
@@ -112,28 +115,16 @@ int main() {
         input_box,
     });
 
-    auto renderer = Renderer(container, [&] {
-        std::vector<Element> queue_elements;
-        {
-            std::lock_guard<std::mutex> lock(data_mutex);
-            std::queue<std::string> temp_queue = message_queue; // Copy queue for display
-            while (!temp_queue.empty()) {
-                queue_elements.push_back(text(temp_queue.front()));
-                temp_queue.pop();
-            }
-        }
-
-        return vbox({
-            text("TermitChat") | bold | border | color(Color::Green3Bis),
-            separator(),
-            text("Received: " + recv_data) | dim,
-            text(cannotSendData.empty() ? "" : ("Error: " + cannotSendData)) | color(Color::Red),
-            separator(),
-            text("Current message queue") | color(Color::Blue),
-            vbox(queue_elements) | border,
-            container->Render(),
-        });
+auto renderer = Renderer(container, [&] {
+    // Return the UI layout (rebuilt completely on each render)
+    return vbox({
+        text("TermitChat") | bold | borderStyled(Color::BlueViolet) | color(Color::Green3Bis), // Single Header
+        separator(),
+        text("Received: " + recv_data) | dim,                        // Received data
+        separator(),                       // Display the message queue
+        container->Render(),                                         // Input box and send button
     });
+});
 
     std::thread asio_thread(asio_task);
     screen.Loop(renderer);
