@@ -1,6 +1,8 @@
 
 build
-.env
+
+# .env file is tracked for defaults but further changes are ignored.
+!.env
 
 # Prerequisites
 *.d
