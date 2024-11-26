@@ -25,12 +25,8 @@ project(TermitChat)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(TermitChat src/main.cpp)
-
 set(ftxui_DIR "${FTXUI_DIR}")
-find_package(ftxui CONFIG REQUIRED)
 
-target_link_libraries(TermitChat PRIVATE ftxui::screen ftxui::dom ftxui::component)
 
 # Add subdirectories for client and server
 add_subdirectory(client)
