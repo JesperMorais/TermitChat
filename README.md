@@ -74,3 +74,11 @@ TODO: ADD BETTER/EASIER WAY TO RUN EACH
 
 ### KNOWN ISSUES
 1. Opening the project and trying to build provides error. Fixed by rebuildning the build map
+
+### Environment Variables
+The `.env` file is used to configure the project. 
+Default values are included in the repository, but local changes are ignored by Git.
+
+If you need to update your `.env` file without affecting the repository, follow these steps:
+1. Modify the `.env` file as needed.
+2. Run `git update-index --assume-unchanged .env` to ensure changes are ignored by Git.
