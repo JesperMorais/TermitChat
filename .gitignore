@@ -1,19 +1,18 @@
 
 build
 
-.vscode
+.vscode/
 # .env file is tracked for defaults but further changes are ignored.
 !.env
 
 vcpkg.json
+vcpkg_installed
 
 # Prerequisites
 *.d
 
-vcpkg_installed
 
-# .gitignore
-CMakeUserPresets.json
+
 
 # Compiled Object files
 *.slo
