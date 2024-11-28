@@ -47,9 +47,13 @@ The Project uses **vcpkg** to handle packages. There for you need a `vcpkg.json`
 After its done type:
 vcpkg install in the terminal ( IN THE ROOT ), this should start installing all the needed packages
 
+## Time to BUILD!
+
 To build Build map: Root/ *"cmake -B build -S ."*   ***
 
 To compile The whole project Root/ *"cmake --build build"*
+
+## TO RUN SERVER/CLIENT
 
 to run specific part: 
 
