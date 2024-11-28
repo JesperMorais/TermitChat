@@ -41,6 +41,8 @@ do the follow command in the terminal to add he libs needed:
 
 ```vcpkg add port paho-mqtt```
 
+The JSON should look something like this:
+
 ```json
 {
   "name": "termitchat",
