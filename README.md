@@ -23,6 +23,10 @@ TO BUILD THIS POOJECT YOU NEED TO SET "VCPKG_ROOT" as ENVIORMENT VERIOBLE after 
 
 *This should be set to the ROOT of vcpkg.*
 
+#### Method 2: Create in manually
+- Simple go into ENV Veribles, click "new" and fill in name "VCPKG_ROOT" and the path "C:\path\to\vcpkg" and click "ok".
+- You should see the new verible be in the list of other veribles
+
 ### BUILDING THE PROJECT
 
 ## Create `vcpkg.json` 
