@@ -36,7 +36,9 @@ The Project uses **vcpkg** to handle packages. There for you need a `vcpkg.json`
 do the follow command in the terminal to add he libs needed: 
 
 ```vcpkg add port asio```
+
 ```vcpkg add port ftxui```
+
 ```vcpkg add port paho-mqtt```
 
 ```json
