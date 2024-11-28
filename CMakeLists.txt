@@ -1,35 +1,25 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.21)
 
-# Read from .env file
-file(READ "${CMAKE_SOURCE_DIR}/.env" ENV_FILE)
-string(REPLACE ";" "\\;" ENV_FILE "${ENV_FILE}")
 
-# Function to extact varaibles from .env file
-function(load_env_variable VAR_NAME)
-    string(REGEX MATCH "^${VAR_NAME}=.*$" MATCH "${ENV_FILE}")
-    if(MATCH)
-        string(REGEX REPLACE "^${VAR_NAME}=(.*)$" "\\1" ${VAR_NAME} "${MATCH}")
-        message(STATUS "Loaded ${VAR_NAME} = ${${VAR_NAME}}")
+# Om CMAKE_TOOLCHAIN_FILE inte är satt, försök använda VCPKG_ROOT
+if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+    if(DEFINED ENV{VCPKG_ROOT})
+        set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
     else()
-        message(WARNING "Environment variable ${VAR_NAME} not found in .env file")
+        message(FATAL_ERROR "CMAKE_TOOLCHAIN_FILE is not set and VCPKG_ROOT environment variable is not defined.")
     endif()
-endfunction()
+endif()
 
-# Load environment variables
-load_env_variable(CMAKE_TOOLCHAIN_FILE)
-load_env_variable(FTXUI_DIR)
-
-set(CMAKE_TOOLCHAIN_FILE "${CMAKE_TOOLCHAIN_FILE}" CACHE STRING "")
 project(TermitChat)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+include_directories("${CMAKE_SOURCE_DIR}/vcpkg_installed/x64-windows/include")
 
-# Add subdirectories for client and server
+# Använd C++17
+set(CMAKE_CXX_STANDARD 17)
+
+find_package(ftxui CONFIG REQUIRED)
+find_package(asio CONFIG REQUIRED)
+
+# Inkludera underkatalogerna
 add_subdirectory(client)
 add_subdirectory(server)
-
-
-
-
-

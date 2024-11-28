@@ -1,8 +1,20 @@
-add_executable(server src/server_main.cpp)
+# Lägg till exekverbara filer
+add_executable(server
+    src/server_main.cpp
+    # Lägg till andra källfiler här om det behövs
+)
 
-find_package(asio CONFIG REQUIRED)
-find_package(ftxui CONFIG REQUIRED)
+# Definiera Windows-version
+add_definitions(-D_WIN32_WINNT=0x0A00)
 
-target_link_libraries(server PRIVATE asio ftxui::screen ftxui::dom ftxui::component)
+# Länka FTXUI-biblioteken
+target_link_libraries(server PRIVATE
+    ftxui::screen
+    ftxui::dom
+    ftxui::component
+)
 
-add_compile_definitions(_WIN32_WINNT=0x0A00)
+# Om du har egna inkluderingsfiler i 'includes'-katalogen
+target_include_directories(server PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/includes"
+)

@@ -19,6 +19,7 @@ queue<string> message_queue;
 vector<string> debug_messages;
 mutex debug_mutex;
 
+
 //You can't just cout debug log with ftxui so we need a new way
 //We there for add all debug messages to a vector 
 void add_debug_message(const string& message) {

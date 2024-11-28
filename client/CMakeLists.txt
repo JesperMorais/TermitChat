@@ -1,10 +1,20 @@
-# Add the executable
-add_executable(client src/client_main.cpp)
+# Lägg till exekverbara filer
+add_executable(client
+    src/client_main.cpp
+    # Lägg till andra källfiler här om det behövs
+)
 
-# Include Asio headers
-find_package(asio CONFIG REQUIRED) # Works if vcpkg toolchain is active
-find_package(ftxui CONFIG REQUIRED)
+# Definiera Windows-version
+add_definitions(-D_WIN32_WINNT=0x0A00)
 
-target_link_libraries(client PRIVATE asio ftxui::screen ftxui::dom ftxui::component)
+# Länka FTXUI-biblioteken
+target_link_libraries(client PRIVATE
+    ftxui::screen
+    ftxui::dom
+    ftxui::component
+)
 
-add_compile_definitions(_WIN32_WINNT=0x0A00)
+# Om du har egna inkluderingsfiler i 'includes'-katalogen
+target_include_directories(client PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/includes"
+)
