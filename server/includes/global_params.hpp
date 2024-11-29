@@ -7,14 +7,15 @@
 
 using namespace std;
 
+extern string serverName;
+
+extern string input_content_server_name;
+
 //string of input of user
 extern string input_content;
 
 /// @brief string of incoming data
 extern string recv_data;
-
-/// @brief checks if the client is connected
-extern bool isClientConnected;
 
 /// @brief Mutex for dataque
 extern mutex data_mutex;

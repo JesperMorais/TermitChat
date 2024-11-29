@@ -4,11 +4,12 @@
 //string of input of user
 string input_content;
 
+string serverName;
+
+string input_content_server_name;
+
 /// @brief string of incoming data
 string recv_data;
-
-/// @brief checks if the client is connected
-bool isClientConnected = false;
 
 /// @brief Mutex for dataque
 mutex data_mutex;
