@@ -11,8 +11,12 @@ add_definitions(-D_WIN32_WINNT=0x0A00)
 target_link_libraries(client PRIVATE
     ftxui::screen
     ftxui::dom
-    ftxui::component
+    ftxui::component eclipse-paho-mqtt-c::paho-mqtt3a 
+    eclipse-paho-mqtt-c::paho-mqtt3c 
+    eclipse-paho-mqtt-c::paho-mqtt3as 
+    eclipse-paho-mqtt-c::paho-mqtt3cs
 )
+
 
 # Om du har egna inkluderingsfiler i 'includes'-katalogen
 target_include_directories(client PRIVATE

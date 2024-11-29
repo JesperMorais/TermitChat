@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
 
-
 # Om CMAKE_TOOLCHAIN_FILE inte är satt, försök använda VCPKG_ROOT
 if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     if(DEFINED ENV{VCPKG_ROOT})
@@ -12,13 +11,14 @@ endif()
 
 project(TermitChat)
 
-include_directories("${CMAKE_SOURCE_DIR}/vcpkg_installed/x64-windows/include")
+include_directories("${CMAKE_SOURCE_DIR}/build/vcpkg_installed/x64-windows/include")
 
 # Använd C++17
 set(CMAKE_CXX_STANDARD 17)
 
 find_package(ftxui CONFIG REQUIRED)
 find_package(asio CONFIG REQUIRED)
+find_package(eclipse-paho-mqtt-c CONFIG REQUIRED)
 
 # Inkludera underkatalogerna
 add_subdirectory(client)
