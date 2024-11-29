@@ -1,63 +1,66 @@
 # Project info
 This project aims to make a fully terminal driven chat written in c++.
 
-Using ftxui for Terminal UX and Asio for network.
+Currently Using ftxui for Terminal UX and Asio for network. Will add MQTT support later on
 
 ## FOR DEVS - HOW TO BUILD PROJECT
 
-# ADD CMakeLists.txt in:
-```client/```
+## SET `VCPKG_ROOT` ENV VERIBLE
 
-```server/```
+TO BUILD THIS POOJECT YOU NEED TO SET "VCPKG_ROOT" as ENVIORMENT VERIOBLE after you have installed **vcpkg** on your system. [vcpkg][https://github.com/microsoft/vcpkg]. This will alow AUTOMATIC building with correct tool chain.
 
+### Windows
 
+#### Method 1: Use cmd
 
-Change the CMakeList.txt to the one below.
-**NOTE** CHANGE the PATHS to YOUR vcpkg dir.
+1. **Open CMD** as admin:
+   -Open CMD as ADMIN
 
-##  ROOT CMakeLists.txt
+3. **SET `VCPKG_ROOT` VERIBLE** with the following command:
 
+   ```cmd
+   setx VCPKG_ROOT "C:\path\to\vcpkg" /M
+
+*This should be set to the ROOT of vcpkg.*
+
+#### Method 2: Create in manually
+- Simple go into ENV Veribles, click "new" and fill in name "VCPKG_ROOT" and the path "C:\path\to\vcpkg" and click "ok".
+- You should see the new verible be in the list of other veribles
+
+### BUILDING THE PROJECT
+
+## Create `vcpkg.json` 
+
+The Project uses **vcpkg** to handle packages. There for you need a `vcpkg.json` in the projects Root:
+
+do the follow command in the terminal to add he libs needed: 
+
+```vcpkg add port asio```
+
+```vcpkg add port ftxui```
+
+```vcpkg add port paho-mqtt```
+
+The JSON should look something like this:
+
+```json
+{
+  "name": "termitchat",
+  "version-string": "0.0.1",
+  "dependencies": [
+    "asio",
+    "ftxui"
+  ]
+}
 ```
-cmake_minimum_required(VERSION 3.15)
 
-# Set the vcpkg toolchain file BEFORE project()
-set(CMAKE_TOOLCHAIN_FILE "D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
+## Time to BUILD!
 
-# Define the project
-project(TermitChat)
-
-# Set C++ standard
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# Add subdirectories for client and server
-add_subdirectory(client)
-add_subdirectory(server)
-
-# Global dependencies (optional: could move to specific CMakeLists.txt files)
-find_package(asio CONFIG REQUIRED)
-find_package(ftxui CONFIG REQUIRED)
-
-# Define _WIN32_WINNT globally for Asio
-add_compile_definitions(_WIN32_WINNT=0x0A00)
-```
-
-## Server / Client CMakeLists.txt
-**CHANGE PATHS AS NEEDED**
-
-**THIS IS A CLIENT EXAMPLE**
-```
-# Add the executable
-add_executable(client src/client_main.cpp)
-
-# Include Asio headers
-find_package(asio CONFIG REQUIRED) # Works if vcpkg toolchain is active
-target_link_libraries(client PRIVATE asio)
-```
-
-To build Build map: Root/ *"cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=D:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake"*   *** CHANGE TO YOUR PATH
+To build Build map: Root/ *"cmake -B build -S ."*   ***
 
 To compile The whole project Root/ *"cmake --build build"*
+
+## TO RUN SERVER/CLIENT
 
 to run specific part: 
 
@@ -75,10 +78,3 @@ TODO: ADD BETTER/EASIER WAY TO RUN EACH
 ### KNOWN ISSUES
 1. Opening the project and trying to build provides error. Fixed by rebuildning the build map
 
-### Environment Variables
-The `.env` file is used to configure the project. 
-Default values are included in the repository, but local changes are ignored by Git.
-
-If you need to update your `.env` file without affecting the repository, follow these steps:
-1. Modify the `.env` file as needed.
-2. Run `git update-index --assume-unchanged .env` to ensure changes are ignored by Git.
