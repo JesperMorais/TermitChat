@@ -22,3 +22,6 @@ vector<string> debug_messages;
 
 /// @brief mutex for debug messages and queue
 mutex debug_mutex;
+
+/// @brief Holds the servers "unicue ID"
+char serverID;

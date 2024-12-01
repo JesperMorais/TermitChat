@@ -28,3 +28,6 @@ extern vector<string> debug_messages;
 
 /// @brief mutex for debug messages and queue
 extern mutex debug_mutex;
+
+/// @brief hold the servers "unice" ID
+extern char serverID;
