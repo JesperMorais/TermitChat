@@ -17,7 +17,7 @@ using namespace std;
 #define USERNAME "jesper"
 #define PASSWORD "morais"
 
-void client_task(const std::string& server_ip, const std::string& server_port) {
+void client_task() {
     asio::io_context io_context;
     int rc;
     MQTTClient client;
@@ -43,7 +43,7 @@ void client_task(const std::string& server_ip, const std::string& server_port) {
 int main() {
 
     std::cout << "Starting client..." << std::endl;
-    client_task(server_ip, server_port);
+    client_task();
 
     return 0;
 }
