@@ -8,11 +8,13 @@
 #include <MQTTClient.h>
 
 using namespace std;
+using namespace ftxui;
 
 #define ADDRESS "tcp://localhost:1883"
 #define QOS 2
 #define TOPIC "server/data"
 #define CLIENTID "testCLient"
+
 
 
 void client_task() {
@@ -40,6 +42,15 @@ int main() {
     //UI för att sätta CLIENTNAMN -> leder till att clienten får ett unikt ID
     //UI & MQTT hitta serverar under subscribe - server/announcment
     //UI Kunna välja bland olika server och connecta till dem.
+
+    auto screen = ScreenInteractive::TerminalOutput();
+
+    // Relaunch the program in a new terminal if not already in one
+    if (getenv("IN_NEW_TERMINAL") == nullptr) {
+        std::string command = "start cmd.exe /k \"set IN_NEW_TERMINAL=1 && build\\server\\debug\\server\"";
+        std::system(command.c_str());
+        return 0;
+    }
 
     
 
