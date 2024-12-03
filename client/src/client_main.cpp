@@ -1,6 +1,9 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <ftxui/component/component.hpp>
+#include <ftxui/dom/elements.hpp>
+#include <ftxui/component/screen_interactive.hpp>
 
 #include <MQTTClient.h>
 
@@ -37,6 +40,9 @@ int main() {
     //UI för att sätta CLIENTNAMN -> leder till att clienten får ett unikt ID
     //UI & MQTT hitta serverar under subscribe - server/announcment
     //UI Kunna välja bland olika server och connecta till dem.
+
+    
+
     cout << "Starting client..." << endl;
     client_task(); //Starta thread istället
 
