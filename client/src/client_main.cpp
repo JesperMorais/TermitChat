@@ -52,7 +52,18 @@ int main() {
         return 0;
     }
 
-    
+    //Håller koll på om clienten skrivit in sitt namn
+    bool client_name_entered = false;
+    string input_content_client_name;
+    string clientName;
+
+    auto client_input = Input(&input_content_client_name, )
+    auto client_input = Button("Fortsätt", [&] {
+        if(!input_content_client_name.empty()){
+            input_content_client_name = true;
+            clientName = input_content_client_name;
+        }
+    })
 
     cout << "Starting client..." << endl;
     client_task(); //Starta thread istället
