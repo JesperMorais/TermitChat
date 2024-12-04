@@ -24,6 +24,7 @@ int main() {
         return 0;
     }
 
+    //TODO: ADD PASSWORD COMPATIBILITY
     // Step 1: Server Name Input Screen
     bool server_name_entered = false;
 
@@ -74,7 +75,10 @@ int main() {
         std::cerr << "Startup avbruten. Ingen server angiven." << std::endl;
         return -1;
     }
-
+    
+    //TODO:REWORK UI TO HAVE PROPPER SERVER UI 
+    //SHOW ACTIVE USERS
+    //CHANGE PASSWORD
     // Step 2: Main Chat UI
     auto input_box = Input(&input_content, "Skriv ditt meddelande...");
     auto send_button = Button("Skicka", [&] {
