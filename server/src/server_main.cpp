@@ -105,8 +105,8 @@ int main() {
         return vbox({
             text("TermitChat") | bold | borderStyled(Color::BlueViolet) | color(Color::Green3Bis) | center | flex | blink,
             separator(),
-            text("Ansluten till server: " + input_content_server_name) | bold | color(Color::Cyan),
-            text("Mottagna meddelanden: " + recv_data) | dim,
+            text("Hostar server: " + input_content_server_name) | bold | color(Color::Cyan),
+            text("Activa Clienter: david, Jesper") | dim | border | flex,
             separator(),
             container->Render(),
             separator(),
