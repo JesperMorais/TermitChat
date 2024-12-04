@@ -19,6 +19,7 @@ set(CMAKE_CXX_STANDARD 17)
 find_package(ftxui CONFIG REQUIRED)
 find_package(asio CONFIG REQUIRED)
 find_package(eclipse-paho-mqtt-c CONFIG REQUIRED)
+find_package(boost_uuid REQUIRED CONFIG)
 
 # Inkludera underkatalogerna
 add_subdirectory(client)

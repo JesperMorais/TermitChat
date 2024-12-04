@@ -19,6 +19,7 @@ target_link_libraries(server PRIVATE
     eclipse-paho-mqtt-c::paho-mqtt3c 
     eclipse-paho-mqtt-c::paho-mqtt3as 
     eclipse-paho-mqtt-c::paho-mqtt3cs
+    Boost::uuid
 )
 
 # Om du har egna inkluderingsfiler i 'includes'-katalogen

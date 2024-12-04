@@ -16,7 +16,6 @@ using namespace ftxui;
 #define CLIENTID "testCLient"
 
 
-
 void client_task() {
 
     int rc;
@@ -84,7 +83,7 @@ int main() {
     });
 
     screen.Loop(first_container);
-    //JAHAOP
+    
     cout << "Starting client..." << endl;
     //client_task(); //Starta thread istället
 

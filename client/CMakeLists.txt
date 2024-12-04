@@ -15,6 +15,7 @@ target_link_libraries(client PRIVATE
     eclipse-paho-mqtt-c::paho-mqtt3c 
     eclipse-paho-mqtt-c::paho-mqtt3as 
     eclipse-paho-mqtt-c::paho-mqtt3cs
+    Boost::uuid
 )
 
 
