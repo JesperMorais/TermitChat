@@ -61,6 +61,7 @@ int main() {
         if(!input_content_client_name.empty()){
             input_content_client_name = true;
             clientName = input_content_client_name;
+            screen.ExitLoopClosure()();
         }else{
             cout << "no empty username allowed" << endl;
         }
@@ -82,8 +83,9 @@ int main() {
         });
     });
 
-    screen.Loop(first_container);
+    screen.Loop(start_renderer);
     
+
     cout << "Starting client..." << endl;
     //client_task(); //Starta thread istället
 
