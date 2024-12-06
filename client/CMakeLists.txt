@@ -1,6 +1,9 @@
 # Lägg till exekverbara filer
 add_executable(client
     src/client_main.cpp
+    src/handle_uuid.cpp
+    src/menus/enter_name_menu.cpp
+    src/menus/menu_state.cpp
     # Lägg till andra källfiler här om det behövs
 )
 
@@ -22,4 +25,5 @@ target_link_libraries(client PRIVATE
 # Om du har egna inkluderingsfiler i 'includes'-katalogen
 target_include_directories(client PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/includes"
+    "${CMAKE_CURRENT_SOURCE_DIR}/includes/menus"
 )

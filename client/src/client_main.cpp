@@ -6,6 +6,8 @@
 #include <ftxui/component/screen_interactive.hpp>
 
 #include <MQTTClient.h>
+#include "handle_uuid.hpp"
+#include "menus/menu_state.hpp"
 
 using namespace std;
 using namespace ftxui;
@@ -15,6 +17,7 @@ using namespace ftxui;
 #define TOPIC "server/data"
 #define CLIENTID "testCLient"
 
+string userID;
 
 void client_task() {
 
@@ -42,7 +45,7 @@ int main() {
     //UI & MQTT hitta serverar under subscribe - server/announcment
     //UI Kunna välja bland olika server och connecta till dem.
 
-    auto screen = ScreenInteractive::TerminalOutput();
+    //auto screen = ScreenInteractive::TerminalOutput();
 
     // Relaunch the program in a new terminal if not already in one
     if (getenv("IN_NEW_TERMINAL") == nullptr) {
@@ -52,41 +55,44 @@ int main() {
     }
 
     //Håller koll på om clienten skrivit in sitt namn
-    bool client_name_entered = false;
-    string input_content_client_name;
-    string clientName;
+    // bool client_name_entered = false;
+    // string input_content_client_name;
+    // string clientName;
 
-    auto client_input = Input(&input_content_client_name, "skriv namn...");
-    auto client_button = Button("Fortsätt..", [&] {
-        if(!input_content_client_name.empty()){
-            input_content_client_name = true;
-            clientName = input_content_client_name;
-            screen.ExitLoopClosure()();
-        }else{
-            cout << "no empty username allowed" << endl;
-        }
-    }) | color(Color::Blue3Bis) | bold | border;
+    // auto client_input = Input(&input_content_client_name, "skriv namn...");
+    // auto client_button = Button("Fortsätt..", [&] {
+    //     if(!input_content_client_name.empty()){
+    //         input_content_client_name = true;
+    //         clientName = input_content_client_name;
+    //         userID = generate_uuid_to_string();
+    //         screen.ExitLoopClosure()();
+    //     }else{
+    //         cout << "no empty username allowed" << endl;
+    //     }
+    // }) | color(Color::Blue3Bis) | bold | border;
 
-    auto first_container = Container::Vertical({
-        client_input,
-        client_button,
-    });
+    // auto first_container = Container::Vertical({
+    //     client_input,
+    //     client_button,
+    // });
 
-    auto start_renderer = Renderer(first_container, [&] {
-        return vbox({
-            text("Välkommen till Termit!") | bold | center | color(Color::Blue),
-            separator(),
-            text("Ange client namn för att fortsätta:"),
-            client_input->Render() | border,
-            client_button->Render(),
-            separator()
-        });
-    });
+    // auto start_renderer = Renderer(first_container, [&] {
+    //     return vbox({
+    //         text("Välkommen till Termit!") | bold | center | color(Color::Blue),
+    //         separator(),
+    //         text("Ange client namn för att fortsätta:"),
+    //         client_input->Render() | border,
+    //         client_button->Render(),
+    //         separator()
+    //     });
+    // });
 
-    screen.Loop(start_renderer);
+    // screen.Loop(start_renderer);
     
+    rund_app();
 
-    cout << "Starting client..." << endl;
+    //en meny för kolla vilka serverar som är online
+     
     //client_task(); //Starta thread istället
 
     return 0;
