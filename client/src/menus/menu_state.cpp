@@ -11,7 +11,7 @@ int rund_app() {
 
     //Skapar enter_name_menu som håller den skärmen SAMT skapar vi lambda för vad som ska ske vid knapp tryckning.
     auto enter_name_menu = MakeEnterNameMenu(&input_content_client_name, &client_name, [&] {
-        app_state = AppState::ServerOW;
+        app_state = AppState::ServerSelect;
         screen.PostEvent(ftxui::Event::Custom);
     });
 
@@ -29,8 +29,8 @@ int rund_app() {
     int current_tab = 0;
     auto tab_container = Container::Tab(
         {
-            enter_name_menu,
-            server_overview_menu
+            enter_name_menu, // 0
+            server_overview_menu // 1
         },
         &current_tab
     );
@@ -41,7 +41,7 @@ int rund_app() {
             case AppState::EnterClientName: 
                 current_tab = 0;
                 break;
-            case AppState::ServerOW:
+            case AppState::ServerSelect:
                 current_tab = 1;
                 break;
             default:

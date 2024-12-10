@@ -39,11 +39,10 @@ ftxui::Component MakeEnterNameMenu(string* input_content_client_name, string* cl
 }
 
 
-ftxui::Component MakeServerOverview(const std::vector<std::string>& servers,
-                                    std::function<void(const std::string&)> on_connect) {
+Component MakeServerOverview(const vector<string>& servers, function<void(const string&)> on_connect) {
     // Radiobox för att välja server
-    int selected_server = 0;
-    auto server_list = Radiobox(&servers, &selected_server);
+    int selected_server = 1;
+    auto server_list = Radiobox({&servers, selected_server});
 
     // Knapp för att ansluta till vald server
     auto connect_button = Button("Anslut", [=] {
@@ -62,7 +61,7 @@ ftxui::Component MakeServerOverview(const std::vector<std::string>& servers,
         return vbox({
             text("Tillgängliga servrar:") | bold | center,
             separator(),
-            server_list->Render() | border,
+            server_list->Render() | border | flex | color(Color::Green3Bis),
             separator(),
             connect_button->Render(),
         }) | border | center;

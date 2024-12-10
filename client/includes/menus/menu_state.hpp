@@ -11,7 +11,7 @@ using namespace ftxui;
 //Håller koll på vilken skärm ska visas
 enum class AppState {
     EnterClientName,
-    ServerOW,
+    ServerSelect,
     ServerDetails,
     InChat,
     Exit
