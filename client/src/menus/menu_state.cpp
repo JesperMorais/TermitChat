@@ -1,9 +1,15 @@
 #include "enter_name_menu.hpp"
 #include "menu_state.hpp"
 #include "handle_uuid.hpp"
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_generators.hpp>
+#include <boost/uuid/uuid_io.hpp>
+
+using namespace boost::uuids;
 
 string client_name;
 string input_content_client_name;
+string clientID;
 
 int rund_app() {
     AppState app_state = AppState::EnterClientName;
@@ -11,6 +17,15 @@ int rund_app() {
 
     //Skapar enter_name_menu som håller den skärmen SAMT skapar vi lambda för vad som ska ske vid knapp tryckning.
     auto enter_name_menu = MakeEnterNameMenu(&input_content_client_name, &client_name, [&] {
+        
+        //Kanske skapa en funktion för detta------
+        uuid id = random_generator()();
+        stringstream ss;
+        ss << id;
+        string uuid_str = ss.str();
+        clientID = uuid_str;
+        //----------------------------------------
+    
         app_state = AppState::ServerSelect;
         screen.PostEvent(ftxui::Event::Custom);
     });
