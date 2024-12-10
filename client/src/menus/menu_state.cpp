@@ -2,37 +2,52 @@
 #include "menu_state.hpp"
 #include "handle_uuid.hpp"
 
-AppState app_state;
 string client_name;
 string input_content_client_name;
 
 int rund_app() {
     AppState app_state = AppState::EnterClientName;
-    auto screen = ScreenInteractive::TerminalOutput();
+    auto screen = ftxui::ScreenInteractive::Fullscreen();
 
-    std::string client_name;
-    std::string input_content_client_name;
-
-    std::vector<std::string> servers = { "Server A", "Server B", "Server C" };
-
-    // Skapa de olika vy-komponenterna först:
+    //Skapar enter_name_menu som håller den skärmen SAMT skapar vi lambda för vad som ska ske vid knapp tryckning.
     auto enter_name_menu = MakeEnterNameMenu(&input_content_client_name, &client_name, [&] {
-        // När on_submit anropas byter vi state.
         app_state = AppState::ServerOW;
-        // Screen kommer uppdateras automatiskt. 
-        // Ingen ExitLoopClosure() behövs här om du vill fortsätta i samma loop.
-        // Om du vill avsluta loopen använder du screen.PostEvent(ftxui::Event::Escape) eller liknande.
+        screen.PostEvent(ftxui::Event::Custom);
     });
 
-    
+    vector<string> servers = {"Server A", "Server B", "Server C"};
 
-    auto main_renderer = Renderer([&] {
+    //Skapar server_overViewMenu som håller den skärmen SAMT skapar vi lambda för vad som ska ske vid knapp tryckning.
+    auto server_overview_menu = MakeServerOverview(servers, [&](const std::string& server_name){
+        
+        app_state = AppState::Exit;
+        screen.PostEvent(ftxui::Event::Custom); //säger till att en uppdaterign skett vilket kommer köra renderingen igen
+    });
+
+
+    //har hand om olika komponenter i renderingen, Lägg till nya menyer här
+    int current_tab = 0;
+    auto tab_container = Container::Tab(
+        {
+            enter_name_menu,
+            server_overview_menu
+        },
+        &current_tab
+    );
+
+    //Main renderer, håller koll på vilken STATE vi är i samt ändrar TAB beroende på detta. Detta kommer i sin tur aktivera "tab container" som retunerar rätt komponent
+    auto main_renderer = Renderer(tab_container, [&] {
         switch (app_state) {
             case AppState::EnterClientName: 
-                return enter_name_menu->Render();
+                current_tab = 0;
+                break;
+            case AppState::ServerOW:
+                current_tab = 1;
+                break;
             default:
                 return text("Invalid state!") | color(Color::Red);
         }
+        return tab_container->Render();
     });
 
     screen.Loop(main_renderer);

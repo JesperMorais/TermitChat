@@ -4,8 +4,10 @@
 #include <ftxui/dom/elements.hpp>
 using namespace ftxui;
 
-ftxui::Component MakeEnterNameMenu(std::string* input_content_client_name, std::string* client_name, std::function<void()> on_submit) {
+ftxui::Component MakeEnterNameMenu(string* input_content_client_name, string* client_name, function<void()> on_submit) {
+    
     auto client_input = Input(input_content_client_name, "skriv namn...");
+
     auto client_button = Button("Fortsätt..", [=] {
         if(!input_content_client_name->empty()) {
             *client_name = *input_content_client_name;
@@ -20,15 +22,51 @@ ftxui::Component MakeEnterNameMenu(std::string* input_content_client_name, std::
         client_button,
     });
 
+   // Renderer för att skapa utseendet
     auto renderer = Renderer(container, [=] {
         return vbox({
             text("Välkommen till Termit!") | bold | center | color(Color::Blue),
             separator(),
             text("Ange client namn för att fortsätta:"),
+            separator(),
             client_input->Render() | border,
+            separator(),
             client_button->Render(),
             separator()
         });
     });
+    return renderer;
+}
+
+
+ftxui::Component MakeServerOverview(const std::vector<std::string>& servers,
+                                    std::function<void(const std::string&)> on_connect) {
+    // Radiobox för att välja server
+    int selected_server = 0;
+    auto server_list = Radiobox(&servers, &selected_server);
+
+    // Knapp för att ansluta till vald server
+    auto connect_button = Button("Anslut", [=] {
+        // Anropa callbacken med namnet på den valda servern
+        on_connect(servers[selected_server]);
+    });
+
+    // Lägg ihop komponenterna i ett container
+    auto container = Container::Vertical({
+        server_list,
+        connect_button,
+    });
+
+    // Renderer för UI
+    auto renderer = Renderer(container, [=] {
+        return vbox({
+            text("Tillgängliga servrar:") | bold | center,
+            separator(),
+            server_list->Render() | border,
+            separator(),
+            connect_button->Render(),
+        }) | border | center;
+    });
+
     return renderer;
 }
