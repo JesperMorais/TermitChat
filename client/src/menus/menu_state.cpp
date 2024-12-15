@@ -11,7 +11,12 @@ string client_name;
 string input_content_client_name;
 string clientID;
 
-int rund_app() {
+int rund_app(void* params) {
+
+    thread_params* params_d = (thread_params*)params;
+
+    params_d->cv;
+    
     AppState app_state = AppState::EnterClientName;
     auto screen = ftxui::ScreenInteractive::Fullscreen();
 
@@ -25,7 +30,13 @@ int rund_app() {
         string uuid_str = ss.str();
         clientID = uuid_str;
         //----------------------------------------
-    
+        if(client_name.empty())
+            params_d->clientInput_username = "NIL"; 
+        else    
+            params_d->clientInput_username = client_name;
+
+        params_d->usernameSet = true;
+
         app_state = AppState::ServerSelect;
         screen.PostEvent(ftxui::Event::Custom);
     });

@@ -8,6 +8,15 @@
 using namespace std;
 using namespace ftxui;
 
+typedef struct{
+    std::mutex m;
+    std::condition_variable cv;
+    std::string clientInput_username;
+    bool ready = false;
+    bool processed = false;
+    bool usernameSet = false;
+}thread_params;
+
 //Håller koll på vilken skärm ska visas
 enum class AppState {
     EnterClientName,
@@ -19,4 +28,4 @@ enum class AppState {
 
 
 /// @brief MAIN FUNCTION TO RUN FTXUI during seassion
-int rund_app();
+int rund_app(void* thead_params);
