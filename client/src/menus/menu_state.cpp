@@ -9,7 +9,6 @@ using namespace boost::uuids;
 
 string client_name;
 string input_content_client_name;
-string clientID;
 
 int rund_app(void* params) {
 
@@ -28,14 +27,19 @@ int rund_app(void* params) {
         stringstream ss;
         ss << id;
         string uuid_str = ss.str();
-        clientID = uuid_str;
         //----------------------------------------
         if(client_name.empty())
             params_d->clientInput_username = "NIL"; 
         else    
             params_d->clientInput_username = client_name;
 
-        params_d->usernameSet = true;
+        //sätter till true sen notifyar mqtt tasken att börja
+        {
+            std::lock_guard<std::mutex> lock(params_d->m);
+            params_d->usernameSet = true;
+            params_d->mqttClient_ID = uuid_str;
+        }
+        params_d->cv.notify_one();
 
         app_state = AppState::ServerSelect;
         screen.PostEvent(ftxui::Event::Custom);

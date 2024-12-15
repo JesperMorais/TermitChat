@@ -12,6 +12,7 @@ typedef struct{
     std::mutex m;
     std::condition_variable cv;
     std::string clientInput_username;
+    std::string mqttClient_ID;
     bool ready = false;
     bool processed = false;
     bool usernameSet = false;
