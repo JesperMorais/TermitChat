@@ -1,0 +1,47 @@
+Client started
+Client started
+MQTT Task started
+Connected to MQTT broker
+Subscribed to topic: /server/announcments/#
+MQTT yeild loop starting
+MQTT Task started
+Client username set to: Jesper
+Client ID set to: 144bb427-97ab-41a3-89e1-d6d9823635de
+Connected to MQTT broker succecfully
+Subscribed to topic: /server/announcments/#
+MQTT yeild loop starting
+MQTT Task started
+Client username set to: was
+Client ID set to: d5599013-8d58-4f8a-910f-8a2d9dc38122
+Connected to MQTT broker succecfully
+Subscribed to topic: /server/announcments/#
+MQTT yeild loop starting
+MQTT Task started
+Client username set to: jes
+Client ID set to: 40e07253-4367-4b29-a49f-775b53feb3f1
+Connected to MQTT broker succecfully
+Callbacks set correctly
+Subscribed to topic: /server/announcments/+
+MQTT yeild loop starting
+MQTT Task started
+Client username set to: JEsper
+Client ID set to: 82feb8eb-ef2d-43f2-acd4-6d28be12485f
+Connected to MQTT broker succecfully
+Callbacks set correctly
+Subscribed to topic: /server/announcments/+
+MQTT yeild loop starting
+MQTT Task started
+Client username set to: Client
+Client ID set to: e9b32720-4077-442d-9235-e9b8f0dc7cd6
+Connected to MQTT broker succecfully
+Callbacks set correctly
+Subscribed to topic: /server/announcments/#
+MQTT yeild loop starting
+MQTT Task started
+MQTT Task started
+Client username set to: Jesper
+Client ID set to: 1cf51a05-9a39-41b4-bb8b-64344f438562
+Connected to MQTT broker succecfully
+Callbacks set correctly
+Subscribed to topic: /server/announcments/#
+MQTT yeild loop starting

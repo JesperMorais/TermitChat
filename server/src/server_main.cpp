@@ -7,7 +7,6 @@
 #include <mutex>
 #include <queue>
 #include "debug.hpp"
-#include "asio_task.hpp"
 #include "global_params.hpp"
 #include "mqtt_client.hpp"
 #include <algorithm>
@@ -123,14 +122,14 @@ int main() {
 
     // Start networking tasks
     std::thread mqtt_thread(mqtt_task);
-    std::thread asio_thread(asio_task);
+    //std::thread asio_thread(asio_task);
 
     // Display the main UI
     screen.Loop(renderer);
 
-    // Wait for threads to finish
+
     mqtt_thread.join();
-    asio_thread.join();
+    //asio_thread.join();
 
     return 0;
 }

@@ -10,6 +10,7 @@
 #include "handle_uuid.hpp"
 #include "menus/menu_state.hpp"
 #include "handle_mqtt.hpp"
+#include "global_params.hpp"
 
 using namespace std;
 using namespace ftxui;
@@ -18,7 +19,6 @@ using namespace ftxui;
 int main() {
 
     thread_params tp;
-
     if (getenv("IN_NEW_TERMINAL") == nullptr) {
         std::string command = "start cmd.exe /k \"set IN_NEW_TERMINAL=1 && build\\client\\debug\\client\"";
         std::system(command.c_str());

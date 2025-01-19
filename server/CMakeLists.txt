@@ -2,7 +2,6 @@
 add_executable(server
     src/server_main.cpp
     src/debug.cpp
-    src/asio_task.cpp
     src/global_params.cpp
     src/mqtt_client.cpp
     # Lägg till andra källfiler här om det behövs

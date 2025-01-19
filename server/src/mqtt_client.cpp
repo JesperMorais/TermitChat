@@ -53,18 +53,25 @@ void connect_mqtt_client(MQTTClient *client)
 }
 
 void publish_server_online(MQTTClient *client){
-    //ID:SERVERNAMN:BOOLIFPASSWORD
-
-    bool reqPassword = false;
-    string message = serverID + ":" + serverName + ":" + to_string(reqPassword);
-
+    //Förväntas en payload som ser ut som {server_name: "server1", "time_stamp": "2021-09-01 12:00:00"}
+    //TODO: FIXA REAL TIME STAMP
+    string message = "{server_name: " + serverName + ", time_stamp: " + "2021-09-01 12:00:00}";
     const char* message_cstr = message.c_str();
 
+    //FIXA TOPIC SÅ ATT DEN SÄGER /server/announcments/serverID
 
-    MQTTClient_publish(*client, TOPIC, strlen(message_cstr), message_cstr, QOS, 0, NULL);
+    string topic = "/server/announcments/" + serverName;
+    const char* topic_cstr = topic.c_str();
+    int count = 0;
+    while (count < 5)
+    {
+        MQTTClient_publish(*client, topic_cstr, strlen(message_cstr), message_cstr, QOS, 1, NULL);
+        count++;
+        this_thread::sleep_for(chrono::milliseconds(1000));
+    }
 
     string msg = (string)message;
-    add_debug_message("Published message to topic: " + msg);
+    add_debug_message("Published message to topic: " + topic + " with message: " + msg);
 }
 
 /// @brief Tar han om MQTT servern.
