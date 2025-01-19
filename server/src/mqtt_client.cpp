@@ -37,7 +37,7 @@ void connect_mqtt_client(MQTTClient *client)
 
     MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
     conn_opts.will = &will_opts;
-    conn_opts.
+    conn_opts.keepAliveInterval = 20;   
 
     int rc;
     if ((rc = MQTTClient_connect(*client, &conn_opts)) != MQTTCLIENT_SUCCESS)

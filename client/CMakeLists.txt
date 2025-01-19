@@ -3,6 +3,7 @@ add_executable(client
     src/client_main.cpp
     src/handle_uuid.cpp
     src/handle_mqtt.cpp
+    src/global_params.cpp
     src/menus/enter_name_menu.cpp
     src/menus/menu_state.cpp
     # Lägg till andra källfiler här om det behövs

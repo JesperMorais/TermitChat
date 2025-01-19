@@ -27,66 +27,10 @@ int main() {
     
     thread ftxui_task(rund_app, &tp);
     thread mqtt_task(mqtt_task, &tp);
-    ftxui_task.join();
+    ftxui_task.detach();
 
+    //MQTT kör en loop så vi kommer inte förbi denna raden, därför kör vi en egen tråd för ftxui
+    mqtt_task.join();
 
     return 0;
 }
-
-// class MQTTManager {
-//     MQTTClient client;
-//     std::mutex mqttMutex;
-//     bool isConnected;
-
-// public:
-//     MQTTManager(char* address, char* clientID) : isConnected(false) {
-//         if (MQTTClient_create(&client, address, clientID, MQTTCLIENT_PERSISTENCE_NONE, NULL) != MQTTCLIENT_SUCCESS) {
-//             throw std::runtime_error("Failed to create MQTT client");
-//         }
-
-//         // Koppla en disconnect-callback
-//         MQTTClient_setDisconnected(client, NULL, this->onDisconnect);
-//     }
-
-//     void connect() {
-//         MQTTClient_willOptions will_opts = MQTTClient_willOptions_initializer;
-//         will_opts.topicName = "client/status";
-//         will_opts.message = "offline";
-//         will_opts.qos = 1;
-//         will_opts.retained = 1;
-
-//         MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
-//         conn_opts.will = &will_opts;
-//         conn_opts.keepAliveInterval = 20;
-//         conn_opts.cleansession = 1;
-
-//         while (!isConnected) {
-//             std::lock_guard<std::mutex> lock(mqttMutex);
-//             int rc = MQTTClient_connect(client, &conn_opts);
-//             if (rc != MQTTCLIENT_SUCCESS) {
-//                 std::cerr << "Failed to connect, retrying... (Error: " << rc << ")" << std::endl;
-//                 std::this_thread::sleep_for(std::chrono::seconds(5));
-//             } else {
-//                 isConnected = true;
-//                 std::cout << "Connected to MQTT broker" << std::endl;
-//             }
-//         }
-//     }
-
-//     void reconnect() {
-//         connect();
-//     }
-
-//     ~MQTTManager() {
-//         if (isConnected) {
-//             MQTTClient_disconnect(client, 1000);
-//         }
-//         MQTTClient_destroy(&client);
-//     }
-
-//     static void onDisconnect(void* context, char* cause) {
-//         std::cout << "Disconnected: " << (cause ? cause : "Unknown reason") << std::endl;
-//         auto* manager = static_cast<MQTTManager*>(context);
-//         manager->reconnect();
-//     }
-// };
