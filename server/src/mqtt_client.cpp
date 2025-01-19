@@ -23,10 +23,6 @@ MQTTClient create_mqtt_client(std::string adress){
     return client;
 }
 
-void disconnect_cb(void *context, MQTTProperties *properties, MQTTReasonCodes reasonCode){
-    add_debug_message("Client was disconnected!");
-}
-
 void connect_mqtt_client(MQTTClient *client)
 {
     MQTTClient_willOptions will_opts = MQTTClient_willOptions_initializer;
@@ -47,8 +43,8 @@ void connect_mqtt_client(MQTTClient *client)
     else
     {
         add_debug_message("MQTT Client Connected!");
+        MQTTClient_subscribe(*client, "/test", QOS);
         isClientConnected = true;
-        MQTTClient_setDisconnected(*client, NULL, disconnect_cb);
     }
 }
 
@@ -70,8 +66,29 @@ void publish_server_online(MQTTClient *client){
         this_thread::sleep_for(chrono::milliseconds(1000));
     }
 
+    MQTTClient_publish(*client, "/test", strlen("test"), "test", QOS, 1, NULL);
     string msg = (string)message;
     add_debug_message("Published message to topic: " + topic + " with message: " + msg);
+}
+
+void connlost(void *context, char *cause) {
+    add_debug_message("Connection lost: " + (string)cause);
+    isClientConnected = false;
+}
+
+// Callback function for message arrival
+int msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_message *message) {
+    add_debug_message(">>> msgarrvd callback anropad!");
+    add_debug_message("Message arrived with len " + to_string(topicLen));
+
+    MQTTClient_freeMessage(&message);
+    MQTTClient_free(topicName);
+    return 1;
+}
+
+// Callback function for message delivery completion
+void delivered(void *context, MQTTClient_deliveryToken dt) {
+    add_debug_message("Message with token " + to_string(dt) + " delivered.");
 }
 
 /// @brief Tar han om MQTT servern.
@@ -95,10 +112,16 @@ void mqtt_task(){
         client = create_mqtt_client(ADDRESS);
         connect_mqtt_client(&client);
     }
+
+    MQTTClient_setCallbacks(client, NULL, connlost, msgarrvd, delivered);
     
     publish_server_online(&client);
     while(1){
         MQTTClient_yield();
         this_thread::sleep_for(chrono::milliseconds(1000));
+        if(!isClientConnected){
+            add_debug_message("Client is not connected, trying to reconnect");
+            connect_mqtt_client(&client);
+        }
     }
 }

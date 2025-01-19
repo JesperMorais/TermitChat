@@ -17,7 +17,9 @@ using namespace ftxui;
 
 
 int main() {
-
+    //CLEAR THE LOG FILE
+    std::ofstream("client/src/debug.log", std::ios::trunc);
+    
     thread_params tp;
     if (getenv("IN_NEW_TERMINAL") == nullptr) {
         std::string command = "start cmd.exe /k \"set IN_NEW_TERMINAL=1 && build\\client\\debug\\client\"";

@@ -63,7 +63,8 @@ void connlost(void *context, char *cause) {
 
 // Callback function for message arrival
 int msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_message *message) {
-    logfile << "Message arrived" << std::endl;
+    logfile << ">>> msgarrvd callback anropad!" << std::endl;
+    logfile << "Message arrived with len " << topicLen << std::endl;
     //if(strncmp(topicName, SERVER_ANNOUNCMENT_TOPIC_PREFIX, PREFIX_LENGTH) == 0){
     handle_server_topic(message);
     //}
@@ -108,6 +109,12 @@ void subscribe_to_topic(){
         logfile << "Failed to subscribe to topic: " << SERVER_ANNOUNCMENT_TOPIC << std::endl;
     }
     logfile << "Subscribed to topic: " << SERVER_ANNOUNCMENT_TOPIC << std::endl;
+
+    rc = MQTTClient_subscribe(mqttClient, "/test", QOS);
+    if (rc != MQTTCLIENT_SUCCESS) {
+        logfile << "Failed to subscribe to topic: " << "/test" << std::endl;
+    }
+    logfile << "Subscribed to topic: " << "/test" << std::endl;   
 }
 
 void mqtt_task(void* thread_para){
