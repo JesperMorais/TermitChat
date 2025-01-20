@@ -66,7 +66,7 @@ void publish_server_online(MQTTClient *client){
         this_thread::sleep_for(chrono::milliseconds(1000));
     }
 
-    MQTTClient_publish(*client, "/test", strlen("test"), "test", QOS, 1, NULL);
+    MQTTClient_publish(*client, "/test", strlen("WASSAP TEST"), "WASSAP TEST", QOS, 1, NULL);
     string msg = (string)message;
     add_debug_message("Published message to topic: " + topic + " with message: " + msg);
 }

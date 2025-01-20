@@ -1,8 +1,63 @@
 MQTT Task started
-Client username set to: nГ¤e
-Client ID set to: 259b41d2-dc26-4a5c-a5ff-fc28fa2bdc00
+Client username set to: jesp
+Client ID set to: c9df364c-86fe-485b-b192-264e742fc168
 Connected to MQTT broker succecfully
-Callbacks set correctly
+-1
 Subscribed to topic: /server/announcments/#
 Subscribed to topic: /test
 MQTT yeild loop starting
+>>> msgarrvd callback anropad!
+Message arrived with len 25
+Handling server topic
+Message arrived on topic:/server/announcments/test
+Message: {server_name: test, time_stamp: 2021-09-01 12:00:00}ээээ27ZЭ
+>>> msgarrvd callback anropad!
+Message arrived with len 33
+Handling server topic
+Message arrived on topic:/server/announcments/JesperServer
+Message: {server_name: JesperServer, time_stamp: 2021-09-01 12:00:00}ээээЭЭЭЭ
+>>> msgarrvd callback anropad!
+Message arrived with len 27
+Handling server topic
+Message arrived on topic:/server/announcments/hejsan
+Message: {server_name: hejsan, time_stamp: 2021-09-01 12:00:00}ээээЭЭЭЭЭЭЭЭЭЭ
+>>> msgarrvd callback anropad!
+Message arrived with len 24
+Handling server topic
+Message arrived on topic:/server/announcments/Hej
+Message: {server_name: Hej, time_stamp: 2021-09-01 12:00:00}ээээЭ«HZЭ
+>>> msgarrvd callback anropad!
+Message arrived with len 5
+Handling server topic
+Message arrived on topic:/test
+Message: WASSAP TESTээээЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭДw‚K
+>>> msgarrvd callback anropad!
+Message arrived with len 34
+Handling server topic
+Message arrived on topic:/server/announcments/JesperServer1
+Message: {server_name: JesperServer1, time_stamp: 2021-09-01 12:00:00}ээээЭЭЭ
+>>> msgarrvd callback anropad!
+Message arrived with len 34
+Handling server topic
+Message arrived on topic:/server/announcments/JesperServer1
+Message: {server_name: JesperServer1, time_stamp: 2021-09-01 12:00:00}ээээЭЭЭ
+>>> msgarrvd callback anropad!
+Message arrived with len 34
+Handling server topic
+Message arrived on topic:/server/announcments/JesperServer1
+Message: {server_name: JesperServer1, time_stamp: 2021-09-01 12:00:00}ээээЭЭЭ
+>>> msgarrvd callback anropad!
+Message arrived with len 34
+Handling server topic
+Message arrived on topic:/server/announcments/JesperServer1
+Message: {server_name: JesperServer1, time_stamp: 2021-09-01 12:00:00}ээээЭЭЭ
+>>> msgarrvd callback anropad!
+Message arrived with len 34
+Handling server topic
+Message arrived on topic:/server/announcments/JesperServer1
+Message: {server_name: JesperServer1, time_stamp: 2021-09-01 12:00:00}ээээЭЭЭ
+>>> msgarrvd callback anropad!
+Message arrived with len 5
+Handling server topic
+Message arrived on topic:/test
+Message: WASSAP TESTээээЭЭЭЭЭЭЭЭЭМВZZЭ

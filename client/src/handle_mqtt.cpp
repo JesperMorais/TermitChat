@@ -98,6 +98,7 @@ void mqtt_connect(){
             } else {
                 isClientConnected = true;
                 logfile << "Connected to MQTT broker succecfully" << std::endl;
+                logfile << MQTTClient_setCallbacks(mqttClient, NULL, connlost, NULL, delivered) << std::endl;
                 break;
             }
     }
@@ -141,20 +142,19 @@ void mqtt_task(void* thread_para){
     //STUCK IN HERE WHILE WE CONNECT, MIGHT NEED TO FIX THIS
     mqtt_connect();
     
-    //client, context/userdefines, connectionLost, messageArrived, deliveryComplete
-    if(MQTTClient_setCallbacks(mqttClient, NULL, connlost, msgarrvd, delivered) != MQTTCLIENT_SUCCESS){
-        logfile << "Failed to set callbacks" << std::endl;
-    }else {
-        logfile << "Callbacks set correctly" << std::endl;
-    }
-    
     //this function subscribes to pre determined topics the user will beable to see / use
     subscribe_to_topic();
 
     logfile << "MQTT yeild loop starting" << std::endl;
     //Sleep to keep task alive for now
+    char* topicName;
+    int topicLen;
+    MQTTClient_message* message;
     while(true){
-        MQTTClient_yield();
+        int rc = MQTTClient_receive(mqttClient, &topicName, &topicLen, &message, 1000); // Timeout på 1 sekund
+        if (rc == MQTTCLIENT_SUCCESS && message != NULL) {
+            msgarrvd(NULL, topicName, topicLen, message);
+        }
     }
     //SUBSCRIBA TILL RELEVANT TOPIC
 }
