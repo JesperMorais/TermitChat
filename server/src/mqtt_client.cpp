@@ -58,15 +58,8 @@ void publish_server_online(MQTTClient *client){
 
     string topic = "/server/announcments/" + serverName;
     const char* topic_cstr = topic.c_str();
-    int count = 0;
-    while (count < 5)
-    {
-        MQTTClient_publish(*client, topic_cstr, strlen(message_cstr), message_cstr, QOS, 1, NULL);
-        count++;
-        this_thread::sleep_for(chrono::milliseconds(1000));
-    }
+    MQTTClient_publish(*client, topic_cstr, strlen(message_cstr), message_cstr, QOS, 1, NULL);
 
-    MQTTClient_publish(*client, "/test", strlen("WASSAP TEST"), "WASSAP TEST", QOS, 1, NULL);
     string msg = (string)message;
     add_debug_message("Published message to topic: " + topic + " with message: " + msg);
 }

@@ -49,8 +49,21 @@ void handle_server_topic(MQTTClient_message *message){
     if(message->payloadlen < 1){
         return;
     }
+    //kolla om den redan finns
     string payload = (char*)message->payload;
     string server_name = payload.substr(payload.find("server_name: ") + 13, payload.find(",") - 13);
+
+    //we only want to check trough the list if its not empty
+    if(!server_list.empty()){
+        logfile << "Server list is not empty" << std::endl;
+        for(auto server: server_list){
+            if(server == server_name){
+                logfile << "servername: " << server_name << " already in list" << std::endl;
+                return;
+            }
+        }
+    }
+    logfile << "Adding server: " << server_name << " to list" << std::endl;
     server_list.push_back(server_name);
 }
 
@@ -65,9 +78,9 @@ void connlost(void *context, char *cause) {
 int msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_message *message) {
     logfile << ">>> msgarrvd callback anropad!" << std::endl;
     logfile << "Message arrived with len " << topicLen << std::endl;
-    //if(strncmp(topicName, SERVER_ANNOUNCMENT_TOPIC_PREFIX, PREFIX_LENGTH) == 0){
-    handle_server_topic(message);
-    //}
+    if(strncmp(topicName, SERVER_ANNOUNCMENT_TOPIC_PREFIX, PREFIX_LENGTH) == 0){
+        handle_server_topic(message);
+    }
     logfile << "Message arrived on topic:" << topicName << std::endl;
     logfile << "Message: " << (char*)message->payload << std::endl;
     MQTTClient_freeMessage(&message);
@@ -110,12 +123,6 @@ void subscribe_to_topic(){
         logfile << "Failed to subscribe to topic: " << SERVER_ANNOUNCMENT_TOPIC << std::endl;
     }
     logfile << "Subscribed to topic: " << SERVER_ANNOUNCMENT_TOPIC << std::endl;
-
-    rc = MQTTClient_subscribe(mqttClient, "/test", QOS);
-    if (rc != MQTTCLIENT_SUCCESS) {
-        logfile << "Failed to subscribe to topic: " << "/test" << std::endl;
-    }
-    logfile << "Subscribed to topic: " << "/test" << std::endl;   
 }
 
 void mqtt_task(void* thread_para){

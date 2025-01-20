@@ -1,63 +1,27 @@
 MQTT Task started
-Client username set to: jesp
-Client ID set to: c9df364c-86fe-485b-b192-264e742fc168
+Client username set to: Jesper
+Client ID set to: c0b36f69-63ff-4b8d-b6b4-19bb93a51707
 Connected to MQTT broker succecfully
 -1
 Subscribed to topic: /server/announcments/#
-Subscribed to topic: /test
 MQTT yeild loop starting
 >>> msgarrvd callback anropad!
-Message arrived with len 25
+Message arrived with len 31
 Handling server topic
-Message arrived on topic:/server/announcments/test
-Message: {server_name: test, time_stamp: 2021-09-01 12:00:00}ээээ27ZЭ
+Adding server: CoolServer, to list
+Message arrived on topic:/server/announcments/CoolServer
+Message: {server_name: CoolServer, time_stamp: 2021-09-01 12:00:00}ээээЭЭЭЭЭЭ
 >>> msgarrvd callback anropad!
-Message arrived with len 33
+Message arrived with len 31
 Handling server topic
-Message arrived on topic:/server/announcments/JesperServer
-Message: {server_name: JesperServer, time_stamp: 2021-09-01 12:00:00}ээээЭЭЭЭ
+Server list is not empty
+servername: CoolServer, already in list
+Message arrived on topic:/server/announcments/CoolServer
+Message: {server_name: CoolServer, time_stamp: 2021-09-01 12:00:00}ээээЭЭЭЭЭЭ
 >>> msgarrvd callback anropad!
-Message arrived with len 27
+Message arrived with len 32
 Handling server topic
-Message arrived on topic:/server/announcments/hejsan
-Message: {server_name: hejsan, time_stamp: 2021-09-01 12:00:00}ээээЭЭЭЭЭЭЭЭЭЭ
->>> msgarrvd callback anropad!
-Message arrived with len 24
-Handling server topic
-Message arrived on topic:/server/announcments/Hej
-Message: {server_name: Hej, time_stamp: 2021-09-01 12:00:00}ээээЭ«HZЭ
->>> msgarrvd callback anropad!
-Message arrived with len 5
-Handling server topic
-Message arrived on topic:/test
-Message: WASSAP TESTээээЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭЭДw‚K
->>> msgarrvd callback anropad!
-Message arrived with len 34
-Handling server topic
-Message arrived on topic:/server/announcments/JesperServer1
-Message: {server_name: JesperServer1, time_stamp: 2021-09-01 12:00:00}ээээЭЭЭ
->>> msgarrvd callback anropad!
-Message arrived with len 34
-Handling server topic
-Message arrived on topic:/server/announcments/JesperServer1
-Message: {server_name: JesperServer1, time_stamp: 2021-09-01 12:00:00}ээээЭЭЭ
->>> msgarrvd callback anropad!
-Message arrived with len 34
-Handling server topic
-Message arrived on topic:/server/announcments/JesperServer1
-Message: {server_name: JesperServer1, time_stamp: 2021-09-01 12:00:00}ээээЭЭЭ
->>> msgarrvd callback anropad!
-Message arrived with len 34
-Handling server topic
-Message arrived on topic:/server/announcments/JesperServer1
-Message: {server_name: JesperServer1, time_stamp: 2021-09-01 12:00:00}ээээЭЭЭ
->>> msgarrvd callback anropad!
-Message arrived with len 34
-Handling server topic
-Message arrived on topic:/server/announcments/JesperServer1
-Message: {server_name: JesperServer1, time_stamp: 2021-09-01 12:00:00}ээээЭЭЭ
->>> msgarrvd callback anropad!
-Message arrived with len 5
-Handling server topic
-Message arrived on topic:/test
-Message: WASSAP TESTээээЭЭЭЭЭЭЭЭЭМВZZЭ
+Server list is not empty
+Adding server: CoolServer1, to list
+Message arrived on topic:/server/announcments/CoolServer1
+Message: {server_name: CoolServer1, time_stamp: 2021-09-01 12:00:00}ээээЭЭЭЭЭ
