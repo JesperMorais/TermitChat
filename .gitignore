@@ -2,9 +2,11 @@
 build
 
 .vscode
-*.log
+!.log
 # .env file is tracked for defaults but further changes are ignored.
 !.env
+
+/client/src/debug.log
 
 vcpkg.json
 vcpkg_installed
