@@ -2,7 +2,7 @@
 build
 
 .vscode
-
+*.log
 # .env file is tracked for defaults but further changes are ignored.
 !.env
 
