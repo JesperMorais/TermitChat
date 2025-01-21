@@ -18,5 +18,4 @@ ftxui::Component MakeEnterNameMenu(std::string* input_content_client_name, std::
 
 // Denna funktion returnerar ett Component för att visa en lista av servrar.
 // on_connect anropas när användaren trycker på knappen för att ansluta.
-ftxui::Component MakeServerOverview(const std::vector<std::string>& servers,
-                                    std::function<void(const std::string&)> on_connect);
+ftxui::Component MakeServerOverview(std::function<void(const std::string&)> on_connect);

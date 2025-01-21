@@ -1,6 +1,6 @@
 MQTT Task started
-Client username set to: Jesper
-Client ID set to: c0b36f69-63ff-4b8d-b6b4-19bb93a51707
+Client username set to: jesper
+Client ID set to: d231867c-8e34-4fd3-a420-f8c7d4adeef6
 Connected to MQTT broker succecfully
 -1
 Subscribed to topic: /server/announcments/#
@@ -8,20 +8,14 @@ MQTT yeild loop starting
 >>> msgarrvd callback anropad!
 Message arrived with len 31
 Handling server topic
-Adding server: CoolServer, to list
-Message arrived on topic:/server/announcments/CoolServer
-Message: {server_name: CoolServer, time_stamp: 2021-09-01 12:00:00}§§§§нннннн
->>> msgarrvd callback anropad!
-Message arrived with len 31
-Handling server topic
-Server list is not empty
-servername: CoolServer, already in list
-Message arrived on topic:/server/announcments/CoolServer
-Message: {server_name: CoolServer, time_stamp: 2021-09-01 12:00:00}§§§§нннннн
+Adding server: ServerTest, to list
+Message arrived on topic:/server/announcments/ServerTest
+Message: {server_name: ServerTest, time_stamp: 2021-09-01 12:00:00}§§§§нннннн
 >>> msgarrvd callback anropad!
 Message arrived with len 32
 Handling server topic
 Server list is not empty
-Adding server: CoolServer1, to list
-Message arrived on topic:/server/announcments/CoolServer1
-Message: {server_name: CoolServer1, time_stamp: 2021-09-01 12:00:00}§§§§ннннн
+Adding server: ServerTest2, to list
+Message arrived on topic:/server/announcments/ServerTest2
+Message: {server_name: ServerTest2, time_stamp: 2021-09-01 12:00:00}§§§§нннннннннТW$xн
+Connected to server: ServerTest,

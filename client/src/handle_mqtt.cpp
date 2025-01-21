@@ -65,7 +65,7 @@ void handle_server_topic(MQTTClient_message *message){
     }
     logfile << "Adding server: " << server_name << " to list" << std::endl;
     {
-        server_list_mutex.lock();
+        lock_guard<std::mutex> lock(server_list_mutex);
         server_list.push_back(server_name);
     }
 }

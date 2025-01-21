@@ -2,6 +2,7 @@
 #include <ftxui/component/component.hpp>
 #include <ftxui/component/screen_interactive.hpp> 
 #include <ftxui/dom/elements.hpp>
+#include "global_params.hpp"
 using namespace ftxui;
 
 ftxui::Component MakeEnterNameMenu(string* input_content_client_name, string* client_name, function<void()> on_submit) {
@@ -39,30 +40,39 @@ ftxui::Component MakeEnterNameMenu(string* input_content_client_name, string* cl
 }
 
 
-Component MakeServerOverview(const vector<string>& servers, function<void(const string&)> on_connect) {
-    // Radiobox för att välja server
-    int selected_server = 1;
-    auto server_list = Radiobox({&servers, selected_server});
+int selected_server = 0;
+Component MakeServerOverview(function<void(const string&)> on_connect) {
+    // Skapar Radiobox med pekare till den globala server_list och selected_server
+    auto server_radio = Radiobox(&server_list, &selected_server);
 
     // Knapp för att ansluta till vald server
     auto connect_button = Button("Anslut", [=] {
-        // Anropa callbacken med namnet på den valda servern
-        
-        on_connect(servers[selected_server]);
+        // Lås mutexen för trådsäker åtkomst till server_list
+        std::lock_guard<std::mutex> lock(server_list_mutex);
+        if(server_list.empty()){
+            logfile << "Servers is empty" << std::endl;
+        } else if(selected_server >= server_list.size()){
+            logfile << selected_server << " is bigger than the size of the server list" << std::endl;
+        } else {
+            // Anropa callbacken med namnet på den valda servern
+            on_connect(server_list[selected_server]);
+        }
     });
 
-    // Lägg ihop komponenterna i ett container
+    // Skapa en container med radioknappen och anslut-knappen
     auto container = Container::Vertical({
-        server_list,
+        server_radio,
         connect_button,
     });
 
-    // Renderer för UI
+    // Renderer för UI-komponenten
     auto renderer = Renderer(container, [=] {
+        // Lås mutexen under rendering för att skydda åtkomst av server_list
+        std::lock_guard<std::mutex> lock(server_list_mutex);
         return vbox({
             text("Tillgängliga servrar:") | bold | center,
             separator(),
-            server_list->Render() | border | flex | color(Color::Green3Bis),
+            server_radio->Render() | border | flex | color(Color::Green3Bis),
             separator(),
             connect_button->Render(),
         }) | border | center;

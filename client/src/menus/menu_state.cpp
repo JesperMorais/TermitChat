@@ -12,6 +12,7 @@ string input_content_client_name;
 
 //Funktion som hämtar serverar som vi kan connecta till
 
+
 int rund_app(void* params) {
 
     thread_params* params_d = (thread_params*)params;
@@ -47,12 +48,14 @@ int rund_app(void* params) {
         screen.PostEvent(ftxui::Event::Custom);
     });
 
-
+    string server_name_;
     //Skapar server_overViewMenu som håller den skärmen SAMT skapar vi lambda för vad som ska ske vid knapp tryckning.
-    auto server_overview_menu = MakeServerOverview(server_list, [&](const std::string& server_name){
+    auto server_overview_menu = MakeServerOverview([&](const std::string& server_name){
         
-        //Ändra app_state till connected to serverX
-        app_state = AppState::Exit;
+        //Ändra app_state till connected to serverX 
+        server_name_ = server_name;
+        logfile << "Connected to server: " << server_name << std::endl;
+        app_state = AppState::ServerDetails;
         screen.PostEvent(ftxui::Event::Custom); //säger till att en uppdaterign skett vilket kommer köra renderingen igen
     });
 
@@ -76,6 +79,8 @@ int rund_app(void* params) {
             case AppState::ServerSelect:
                 current_tab = 1;
                 break;
+            case AppState::ServerDetails:
+                return text("Connected to server " + server_name_) | color(Color::Green);
             default:
                 return text("Invalid state!") | color(Color::Red);
         }
