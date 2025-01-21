@@ -56,7 +56,7 @@ void handle_server_topic(MQTTClient_message *message){
     //we only want to check trough the list if its not empty
     if(!server_list.empty()){
         logfile << "Server list is not empty" << std::endl;
-        for(auto server: server_list){
+    for(auto server: server_list){
             if(server == server_name){
                 logfile << "servername: " << server_name << " already in list" << std::endl;
                 return;
@@ -64,7 +64,10 @@ void handle_server_topic(MQTTClient_message *message){
         }
     }
     logfile << "Adding server: " << server_name << " to list" << std::endl;
-    server_list.push_back(server_name);
+    {
+        server_list_mutex.lock();
+        server_list.push_back(server_name);
+    }
 }
 
 // Callback function for connection lost

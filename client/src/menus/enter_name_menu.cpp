@@ -47,6 +47,7 @@ Component MakeServerOverview(const vector<string>& servers, function<void(const 
     // Knapp för att ansluta till vald server
     auto connect_button = Button("Anslut", [=] {
         // Anropa callbacken med namnet på den valda servern
+        
         on_connect(servers[selected_server]);
     });
 

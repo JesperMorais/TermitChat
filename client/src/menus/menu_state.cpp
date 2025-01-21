@@ -7,19 +7,10 @@
 #include "global_params.hpp"
 
 using namespace boost::uuids;
-vector<string> servers;
 string client_name;
 string input_content_client_name;
 
 //Funktion som hämtar serverar som vi kan connecta till
-void fetch_servers(){
-    while(true){
-        if(server_list.size() > 0){
-            servers = server_list;
-        }
-        this_thread::sleep_for(chrono::seconds(4));
-    }
-}
 
 int rund_app(void* params) {
 
@@ -56,14 +47,9 @@ int rund_app(void* params) {
         screen.PostEvent(ftxui::Event::Custom);
     });
 
-    servers = {""};
-    //Hämtar serverar vi kan connecta till
-    thread fetch_task(fetch_servers);
-    //Vänta på att ftxui_task ska bli klar
-    fetch_task.detach();
 
     //Skapar server_overViewMenu som håller den skärmen SAMT skapar vi lambda för vad som ska ske vid knapp tryckning.
-    auto server_overview_menu = MakeServerOverview(servers, [&](const std::string& server_name){
+    auto server_overview_menu = MakeServerOverview(server_list, [&](const std::string& server_name){
         
         //Ändra app_state till connected to serverX
         app_state = AppState::Exit;
