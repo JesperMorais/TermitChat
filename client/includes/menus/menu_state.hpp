@@ -10,9 +10,11 @@ using namespace ftxui;
 
 typedef struct{
     std::mutex m;
-    std::condition_variable cv;
+    std::condition_variable cv; // för att vänta på namn av användaren
+    std::condition_variable mqtt_message_cv; // för att vänta på mqtt meddelanden
     std::string clientInput_username;
     std::string mqttClient_ID;
+    std::string current_server_name;
     bool ready = false;
     bool processed = false;
     bool usernameSet = false;

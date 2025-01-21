@@ -45,6 +45,7 @@ Component MakeServerOverview(function<void(const string&)> on_connect) {
     // Skapar Radiobox med pekare till den globala server_list och selected_server
     auto server_radio = Radiobox(&server_list, &selected_server);
 
+    logfile << "in Make server overview" << std::endl;
     // Knapp för att ansluta till vald server
     auto connect_button = Button("Anslut", [=] {
         // Lås mutexen för trådsäker åtkomst till server_list
@@ -75,6 +76,30 @@ Component MakeServerOverview(function<void(const string&)> on_connect) {
             server_radio->Render() | border | flex | color(Color::Green3Bis),
             separator(),
             connect_button->Render(),
+        }) | border | center;
+    });
+
+    return renderer;
+}
+
+
+Component MakeServerDetails(const std::string* serverName, std::function<void()> on_connect) {
+    // Skapa en knapp med callback för att ansluta
+    auto connect_button = Button("Connect", on_connect);
+
+    auto container = Container::Vertical({
+        connect_button
+    });
+
+    // Renderer för att bygga utseendet på serverdetaljskärmen
+    auto renderer = Renderer(container, [=] {
+        return vbox({
+            text("Server Details") | bold | center,
+            separator(),
+            text("Server Name: " + *serverName) | center,
+            // Här kan du lägga till fler serverdetaljer vid behov
+            separator(),
+            connect_button->Render() | center
         }) | border | center;
     });
 

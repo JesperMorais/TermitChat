@@ -8,6 +8,9 @@
 #include "global_params.hpp"
 
 #define SERVER_ANNOUNCMENT_TOPIC "/server/announcments/#"
+#define SERVER_CHAT "/server/n/chat"
+const char* SERVER_TOPIC_PREFIX = "/server/";
+const char* CHAT_PREFIX = "/chat";
 
 const char* SERVER_ANNOUNCMENT_TOPIC_PREFIX = "/server/announcments/";
 const size_t PREFIX_LENGTH = strlen(SERVER_ANNOUNCMENT_TOPIC_PREFIX);
@@ -16,6 +19,7 @@ const size_t PREFIX_LENGTH = strlen(SERVER_ANNOUNCMENT_TOPIC_PREFIX);
 #define QOS 2
 #define KEEP_ALIVE_INTERVALS 20
 
+string CURRENT_SERVER_CHAT_TOPIC = ""; // UPDATERAS NÄR VI CONNECTAR TILL EN SERVER
 
 #define BROKER_ADRESS "mqtt://127.0.0.1:1883"
 
@@ -23,6 +27,7 @@ const size_t PREFIX_LENGTH = strlen(SERVER_ANNOUNCMENT_TOPIC_PREFIX);
 MQTTClient mqttClient;
 bool isClientConnected = false;
 std::string clientUsername;
+
 
 /*
 TOPIC DEFINES HERE:
@@ -43,6 +48,43 @@ TOPIC DEFINES HERE:
 
 */ 
 
+void sub_to_current_server_task(void* params){
+    logfile << "Sub to current server task started" << std::endl;
+    thread_params* parms = (thread_params*)params;
+    std::string current_server_name;
+    while(true){
+        logfile << "Waiting for new server to subscribe to" << std::endl;
+        {
+            std::unique_lock lk(parms->m);
+            parms->mqtt_message_cv.wait(lk, [&] {return parms->current_server_name != current_server_name;}); //kollar så vi inte subbar till samma server igen
+        }
+        //unsubscribe from old server
+        if(current_server_name != ""){
+            std::string topic = "/server/" + current_server_name + "/#";
+            int rc = MQTTClient_unsubscribe(mqttClient, topic.c_str());
+            if (rc != MQTTCLIENT_SUCCESS) {
+                logfile << "Failed to unsubscribe from topic: " << topic << std::endl;
+            }
+            logfile << "Unsubscribed from topic: " << topic << std::endl;
+        }
+        current_server_name = parms->current_server_name;
+        logfile << "Subscribing to server: " << current_server_name << std::endl;
+        std::string topic = "/server/" + current_server_name + "/#";
+        int rc = MQTTClient_subscribe(mqttClient, topic.c_str(), QOS);
+        if (rc != MQTTCLIENT_SUCCESS) {
+            logfile << "Failed to subscribe to topic: " << topic << std::endl;
+        }
+        logfile << "Subscribed to topic: " << topic << std::endl;
+        string CURRENT_SERVER_CHAT_TOPIC = SERVER_TOPIC_PREFIX + current_server_name + CHAT_PREFIX;
+        logfile << "made chat topic: " << CURRENT_SERVER_CHAT_TOPIC << std::endl;
+        }
+    }
+
+void handle_chat_messages(MQTTClient_message *message){
+    string paylod = (char*)message->payload;
+    logfile << "Handling chat message: " << paylod << std::endl;
+}
+
 void handle_server_topic(MQTTClient_message *message){
     //Förväntas en payload som ser ut som {server_name: "server1", "time_stamp": "2021-09-01 12:00:00"}
     logfile << "Handling server topic" << std::endl;
@@ -51,7 +93,7 @@ void handle_server_topic(MQTTClient_message *message){
     }
     //kolla om den redan finns
     string payload = (char*)message->payload;
-    string server_name = payload.substr(payload.find("server_name: ") + 13, payload.find(",") - 13);
+    string server_name = payload.substr(payload.find("server_name: ") + 13, payload.find(",") - 14);
 
     //we only want to check trough the list if its not empty
     if(!server_list.empty()){
@@ -79,12 +121,13 @@ void connlost(void *context, char *cause) {
 
 // Callback function for message arrival
 int msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_message *message) {
-    logfile << ">>> msgarrvd callback anropad!" << std::endl;
-    logfile << "Message arrived with len " << topicLen << std::endl;
     if(strncmp(topicName, SERVER_ANNOUNCMENT_TOPIC_PREFIX, PREFIX_LENGTH) == 0){
         handle_server_topic(message);
+    }else if(!CURRENT_SERVER_CHAT_TOPIC.empty()){
+        if(strncmp(topicName, CURRENT_SERVER_CHAT_TOPIC.c_str(), CURRENT_SERVER_CHAT_TOPIC.length()) == 0){
+            handle_chat_messages(message);
+        }
     }
-    logfile << "Message arrived on topic:" << topicName << std::endl;
     logfile << "Message: " << (char*)message->payload << std::endl;
     MQTTClient_freeMessage(&message);
     MQTTClient_free(topicName);
@@ -151,7 +194,10 @@ void mqtt_task(void* thread_para){
     }
     //STUCK IN HERE WHILE WE CONNECT, MIGHT NEED TO FIX THIS
     mqtt_connect();
-    
+
+    thread sub_to_server(sub_to_current_server_task, parms);
+    sub_to_server.detach();
+
     //this function subscribes to pre determined topics the user will beable to see / use
     subscribe_to_topic();
 
