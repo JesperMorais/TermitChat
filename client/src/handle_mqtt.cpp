@@ -6,6 +6,8 @@
 #include "menus/menu_state.hpp"
 #include "handle_mqtt.hpp"
 #include "global_params.hpp"
+#include <MQTTAsync.h>
+
 
 #define SERVER_ANNOUNCMENT_TOPIC "/server/announcments/#"
 #define SERVER_CHAT "/server/n/chat"
@@ -19,15 +21,14 @@ const size_t PREFIX_LENGTH = strlen(SERVER_ANNOUNCMENT_TOPIC_PREFIX);
 #define QOS 2
 #define KEEP_ALIVE_INTERVALS 20
 
-string CURRENT_SERVER_CHAT_TOPIC = ""; // UPDATERAS NÄR VI CONNECTAR TILL EN SERVER
+string CURRENT_SERVER_CHAT_TOPIC; // UPDATERAS NÄR VI CONNECTAR TILL EN SERVER
 
 #define BROKER_ADRESS "mqtt://127.0.0.1:1883"
-
 
 MQTTClient mqttClient;
 bool isClientConnected = false;
 std::string clientUsername;
-
+bool chat_has_set = false;
 
 /*
 TOPIC DEFINES HERE:
@@ -67,6 +68,7 @@ void sub_to_current_server_task(void* params){
             }
             logfile << "Unsubscribed from topic: " << topic << std::endl;
         }
+
         current_server_name = parms->current_server_name;
         logfile << "Subscribing to server: " << current_server_name << std::endl;
         std::string topic = "/server/" + current_server_name + "/#";
@@ -75,13 +77,32 @@ void sub_to_current_server_task(void* params){
             logfile << "Failed to subscribe to topic: " << topic << std::endl;
         }
         logfile << "Subscribed to topic: " << topic << std::endl;
-        string CURRENT_SERVER_CHAT_TOPIC = SERVER_TOPIC_PREFIX + current_server_name + CHAT_PREFIX;
+        CURRENT_SERVER_CHAT_TOPIC = SERVER_TOPIC_PREFIX + current_server_name + CHAT_PREFIX;
         logfile << "made chat topic: " << CURRENT_SERVER_CHAT_TOPIC << std::endl;
+
+        rc = MQTTClient_subscribe(mqttClient, CURRENT_SERVER_CHAT_TOPIC.c_str(), QOS);
+        if (rc != MQTTCLIENT_SUCCESS) {
+            logfile << "Failed to subscribe to topic: " << CURRENT_SERVER_CHAT_TOPIC << std::endl;
+        }else{
+            logfile << "Subscribed to topic: " << CURRENT_SERVER_CHAT_TOPIC << std::endl;
         }
+        logfile << "current chat define is now set to:" << CURRENT_SERVER_CHAT_TOPIC << std::endl;
     }
+}
 
 void handle_chat_messages(MQTTClient_message *message){
+    logfile << "Inside Handling chat message" << std::endl;
     string paylod = (char*)message->payload;
+    //mutex que och lägg in data i que
+    {
+        logfile << "Pushing chat message to que" << std::endl;
+        lock_guard<std::mutex> lock(chat_que_mutex);
+        if(chat_que.size() >= 10){
+            chat_que.pop();
+        }
+        chat_que.push(paylod);
+        logfile << "Pushed chat message to que:" << (string)paylod <<std::endl;
+    }
     logfile << "Handling chat message: " << paylod << std::endl;
 }
 
@@ -124,9 +145,13 @@ int msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_message *m
     if(strncmp(topicName, SERVER_ANNOUNCMENT_TOPIC_PREFIX, PREFIX_LENGTH) == 0){
         handle_server_topic(message);
     }else if(!CURRENT_SERVER_CHAT_TOPIC.empty()){
+        logfile << "currnet chat topic not empty" << std::endl;
         if(strncmp(topicName, CURRENT_SERVER_CHAT_TOPIC.c_str(), CURRENT_SERVER_CHAT_TOPIC.length()) == 0){
+            logfile << "Handling chat message" << std::endl;
             handle_chat_messages(message);
         }
+    }else{
+        logfile << "the topic was" << topicName << "and the current chat topic is: " << CURRENT_SERVER_CHAT_TOPIC << std::endl;
     }
     logfile << "Message: " << (char*)message->payload << std::endl;
     MQTTClient_freeMessage(&message);
@@ -140,14 +165,12 @@ void delivered(void *context, MQTTClient_deliveryToken dt) {
 }
 
 void mqtt_connect(){
-    MQTTClient_willOptions will_opts = MQTTClient_willOptions_initializer;
-        will_opts.topicName = OFFLINE_CLIENT_TOPIC;
-        will_opts.message = "offline";
-        will_opts.qos = QOS;
+
+        logfile << MQTTClient_setCallbacks(mqttClient, NULL, connlost, msgarrvd, delivered) << std::endl;
 
         MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
-        conn_opts.will = &will_opts;
-        conn_opts.cleansession = 1;
+        conn_opts.keepAliveInterval = KEEP_ALIVE_INTERVALS;
+                
 
         while (!isClientConnected) {
             int rc = MQTTClient_connect(mqttClient, &conn_opts);
@@ -157,7 +180,6 @@ void mqtt_connect(){
             } else {
                 isClientConnected = true;
                 logfile << "Connected to MQTT broker succecfully" << std::endl;
-                logfile << MQTTClient_setCallbacks(mqttClient, NULL, connlost, NULL, delivered) << std::endl;
                 break;
             }
     }
@@ -192,6 +214,9 @@ void mqtt_task(void* thread_para){
     if (MQTTClient_create(&mqttClient, BROKER_ADRESS, c_str_clientid, MQTTCLIENT_PERSISTENCE_NONE, NULL) != MQTTCLIENT_SUCCESS) {
         logfile << "Failed to create MQTT client" << std::endl;
     }
+    else {
+        logfile << "MQTT client created" << std::endl;
+    }
     //STUCK IN HERE WHILE WE CONNECT, MIGHT NEED TO FIX THIS
     mqtt_connect();
 
@@ -202,15 +227,9 @@ void mqtt_task(void* thread_para){
     subscribe_to_topic();
 
     logfile << "MQTT yeild loop starting" << std::endl;
-    //Sleep to keep task alive for now
-    char* topicName;
-    int topicLen;
-    MQTTClient_message* message;
+
     while(true){
-        int rc = MQTTClient_receive(mqttClient, &topicName, &topicLen, &message, 1000); // Timeout på 1 sekund
-        if (rc == MQTTCLIENT_SUCCESS && message != NULL) {
-            msgarrvd(NULL, topicName, topicLen, message);
-        }
+        MQTTClient_yield();
     }
     //SUBSCRIBA TILL RELEVANT TOPIC
 }

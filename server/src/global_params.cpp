@@ -1,5 +1,6 @@
 #include <iostream>
 #include "global_params.hpp"
+using namespace std;
 
 //string of input of user
 string input_content;

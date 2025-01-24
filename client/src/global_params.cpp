@@ -5,4 +5,7 @@
 std::vector<std::string> server_list;
 std::mutex server_list_mutex;
 
+std::mutex chat_que_mutex;
+std::queue<std::string> chat_que;
+
 std::ofstream logfile("client/src/debug.log", std::ios::app);

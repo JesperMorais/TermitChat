@@ -1,23 +1,281 @@
 MQTT Task started
 in Make server overview
-Client username set to: dd
-Client ID set to: 869bcf94-9706-4f9d-ba95-2726bfea1a8c
+Client username set to: jes
+Client ID set to: 42169528-169f-4de1-8a41-305215cc4362
+MQTT client created
+0
 Connected to MQTT broker succecfully
--1
 Sub to current server task started
 Waiting for new server to subscribe to
 Subscribed to topic: /server/announcments/#
 MQTT yeild loop starting
 Handling server topic
-Adding server: ServerTest to list
-Message: {server_name: ServerTest, time_stamp: 2021-09-01 12:00:00}ııııİİİİİİk
-Handling server topic
-Server list is not empty
-Adding server: ServerTest2 to list
-Message: {server_name: ServerTest2, time_stamp: 2021-09-01 12:00:00}ııııİİİİİİİİİ%)6İİ
-Trying to connect to server: ServerTest
-Connected to server: ServerTest
-Subscribing to server: ServerTest
-Subscribed to topic: /server/ServerTest/#
-made chat topic: /server/ServerTest/chat
+Adding server: wow to list
+Message: {server_name: wow, time_stamp: 2021-09-01 12:00:00}ıııı
+Trying to connect to server: wow
+Connected to server: wow
+Subscribing to server: wow
+in GetChatMessages
+GetChatMessages: 0 messages
+Subscribed to topic: /server/wow/#
+made chat topic: /server/wow/chat
+Subscribed to topic: /server/wow/chat
+current chat define is now set to:/server/wow/chat
 Waiting for new server to subscribe to
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+in GetChatMessages
+GetChatMessages: 0 messages
+currnet chat topic not empty
+Handling chat message
+Inside Handling chat message
+Pushing chat message to que
+Pushed chat message to que:hejııııİ÷.R
+Handling chat message: hejııııİ÷.R
+Message: hejııııİ÷.R
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages
+in GetChatMessages
+GetChatMessages: 1 messages

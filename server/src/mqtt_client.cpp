@@ -103,12 +103,16 @@ void mqtt_task(){
         tries += 1;
         
         client = create_mqtt_client(ADDRESS);
+        MQTTClient_setCallbacks(client, NULL, connlost, msgarrvd, delivered);
         connect_mqtt_client(&client);
     }
 
-    MQTTClient_setCallbacks(client, NULL, connlost, msgarrvd, delivered);
     
     publish_server_online(&client);
+    string chatTopic = "/server/" + serverName + "/#";
+    const char* topic = chatTopic.c_str();
+    
+    MQTTClient_subscribe(client, topic, QOS);
     while(1){
         MQTTClient_yield();
         this_thread::sleep_for(chrono::milliseconds(1000));

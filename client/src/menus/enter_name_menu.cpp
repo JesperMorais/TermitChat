@@ -83,24 +83,67 @@ Component MakeServerOverview(function<void(const string&)> on_connect) {
 }
 
 
+
+// Funktion för att hämta aktuella meddelanden
+std::vector<std::string> GetChatMessages() {
+    logfile << "in GetChatMessages" << std::endl;
+    std::vector<std::string> messages;
+    std::lock_guard<std::mutex> lock(chat_que_mutex);
+    std::queue<std::string> temp = chat_que; // Kopiera kön
+    while (!temp.empty()) {
+        messages.push_back(temp.front());
+        temp.pop();
+    }
+    logfile << "GetChatMessages: " << messages.size() << " messages" << std::endl;
+    return messages;
+}
+
+// Funktion för att skapa meddelanderutan
+ftxui::Component MakeChatBox() {
+    return ftxui::Renderer([&] {
+        auto messages = GetChatMessages();
+        std::vector<ftxui::Element> message_elements;
+        for (const auto& msg : messages) {
+            message_elements.push_back(ftxui::text(msg) | color(Color::Yellow2));
+        }
+
+        return ftxui::vbox({
+                   ftxui::text("Meddelanden") | ftxui::bold,
+                   ftxui::separator(),
+                   ftxui::vbox(message_elements) | ftxui::border | ftxui::frame | ftxui::size(ftxui::HEIGHT, ftxui::EQUAL, 10),
+               }) |
+               ftxui::border | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 50);
+    });
+}
+
 Component MakeServerDetails(const std::string* serverName, std::function<void()> on_connect) {
+    using namespace ftxui;
+
     // Skapa en knapp med callback för att ansluta
     auto connect_button = Button("Connect", on_connect);
 
+    // Skapa meddelanderutan
+    auto chat_box = MakeChatBox();
+
+    // Skapa en container med vertikal layout
     auto container = Container::Vertical({
-        connect_button
+        connect_button,
+        chat_box, // Lägg till meddelanderutan här
     });
 
     // Renderer för att bygga utseendet på serverdetaljskärmen
     auto renderer = Renderer(container, [=] {
         return vbox({
-            text("Server Details") | bold | center,
-            separator(),
-            text("Server Name: " + *serverName) | center,
-            // Här kan du lägga till fler serverdetaljer vid behov
-            separator(),
-            connect_button->Render() | center
-        }) | border | center;
+                   text("Server Details") | bold | center,
+                   separator(),
+                   text("Server Name: " + *serverName) | center,
+                   // Här kan du lägga till fler serverdetaljer vid behov
+                   separator(),
+                   connect_button->Render() | center,
+                   separator(),
+                   chat_box->Render() // Rendera meddelanderutan
+               }) |
+               border | center;
     });
 
     return renderer;
