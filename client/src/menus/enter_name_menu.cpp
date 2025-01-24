@@ -86,7 +86,6 @@ Component MakeServerOverview(function<void(const string&)> on_connect) {
 
 // Funktion för att hämta aktuella meddelanden
 std::vector<std::string> GetChatMessages() {
-    logfile << "in GetChatMessages" << std::endl;
     std::vector<std::string> messages;
     std::lock_guard<std::mutex> lock(chat_que_mutex);
     std::queue<std::string> temp = chat_que; // Kopiera kön
@@ -94,7 +93,6 @@ std::vector<std::string> GetChatMessages() {
         messages.push_back(temp.front());
         temp.pop();
     }
-    logfile << "GetChatMessages: " << messages.size() << " messages" << std::endl;
     return messages;
 }
 

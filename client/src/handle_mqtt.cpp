@@ -92,7 +92,8 @@ void sub_to_current_server_task(void* params){
 
 void handle_chat_messages(MQTTClient_message *message){
     logfile << "Inside Handling chat message" << std::endl;
-    string paylod = (char*)message->payload;
+    string paylod((char*)message->payload, message->payloadlen);
+    paylod = "message: " + paylod;
     //mutex que och lägg in data i que
     {
         logfile << "Pushing chat message to que" << std::endl;
@@ -100,6 +101,7 @@ void handle_chat_messages(MQTTClient_message *message){
         if(chat_que.size() >= 10){
             chat_que.pop();
         }
+        logfile << "Pushing chat message to que" <<  paylod << std::endl;
         chat_que.push(paylod);
         logfile << "Pushed chat message to que:" << (string)paylod <<std::endl;
     }

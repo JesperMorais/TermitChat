@@ -1,7 +1,7 @@
 MQTT Task started
 in Make server overview
-Client username set to: jes
-Client ID set to: 42169528-169f-4de1-8a41-305215cc4362
+Client username set to: dd
+Client ID set to: cd153cce-f791-4fbf-853b-d1098f482071
 MQTT client created
 0
 Connected to MQTT broker succecfully
@@ -15,267 +15,104 @@ Message: {server_name: wow, time_stamp: 2021-09-01 12:00:00}ıııı
 Trying to connect to server: wow
 Connected to server: wow
 Subscribing to server: wow
-in GetChatMessages
-GetChatMessages: 0 messages
 Subscribed to topic: /server/wow/#
 made chat topic: /server/wow/chat
 Subscribed to topic: /server/wow/chat
 current chat define is now set to:/server/wow/chat
 Waiting for new server to subscribe to
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
-in GetChatMessages
-GetChatMessages: 0 messages
 currnet chat topic not empty
 Handling chat message
 Inside Handling chat message
 Pushing chat message to que
-Pushed chat message to que:hejııııİ÷.R
-Handling chat message: hejııııİ÷.R
-Message: hejııııİ÷.R
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
-in GetChatMessages
-GetChatMessages: 1 messages
+Pushing chat message to quemessage: äloö
+Pushed chat message to que:message: äloö
+Handling chat message: message: äloö
+Message: äloöııııŞm’s
+currnet chat topic not empty
+Handling chat message
+Inside Handling chat message
+Pushing chat message to que
+Pushing chat message to quemessage: Hejsan -q 2
+Pushed chat message to que:message: Hejsan -q 2
+Handling chat message: message: Hejsan -q 2
+Message: Hejsan -q 2ııııİİİİİ
+currnet chat topic not empty
+Handling chat message
+Inside Handling chat message
+Pushing chat message to que
+Pushing chat message to quemessage: Hejsan
+Pushed chat message to que:message: Hejsan
+Handling chat message: message: Hejsan
+Message: Hejsanııııİİİİİİİİİİ
+currnet chat topic not empty
+Handling chat message
+Inside Handling chat message
+Pushing chat message to que
+Pushing chat message to quemessage: Hejsan
+Pushed chat message to que:message: Hejsan
+Handling chat message: message: Hejsan
+Message: Hejsanııııİİİİİİİİİİ
+currnet chat topic not empty
+Handling chat message
+Inside Handling chat message
+Pushing chat message to que
+Pushing chat message to quemessage: Hejsan
+Pushed chat message to que:message: Hejsan
+Handling chat message: message: Hejsan
+Message: Hejsanııııİİİİİİİİİİ
+currnet chat topic not empty
+Handling chat message
+Inside Handling chat message
+Pushing chat message to que
+Pushing chat message to quemessage: Hejsan
+Pushed chat message to que:message: Hejsan
+Handling chat message: message: Hejsan
+Message: Hejsanııııİİİİİİİİİİ
+currnet chat topic not empty
+Handling chat message
+Inside Handling chat message
+Pushing chat message to que
+Pushing chat message to quemessage: Hejsan
+Pushed chat message to que:message: Hejsan
+Handling chat message: message: Hejsan
+Message: Hejsanııııİİİİİİİİİİ
+currnet chat topic not empty
+Handling chat message
+Inside Handling chat message
+Pushing chat message to que
+Pushing chat message to quemessage: Hejsan
+Pushed chat message to que:message: Hejsan
+Handling chat message: message: Hejsan
+Message: Hejsanııııİİİİİİİİİİ
+currnet chat topic not empty
+Handling chat message
+Inside Handling chat message
+Pushing chat message to que
+Pushing chat message to quemessage: Hejsan
+Pushed chat message to que:message: Hejsan
+Handling chat message: message: Hejsan
+Message: Hejsanııııİİİİİİİİİİ
+currnet chat topic not empty
+Handling chat message
+Inside Handling chat message
+Pushing chat message to que
+Pushing chat message to quemessage: Hejsan
+Pushed chat message to que:message: Hejsan
+Handling chat message: message: Hejsan
+Message: Hejsanııııİİİİİİİİİİ
+currnet chat topic not empty
+Handling chat message
+Inside Handling chat message
+Pushing chat message to que
+Pushing chat message to quemessage: Hejsan
+Pushed chat message to que:message: Hejsan
+Handling chat message: message: Hejsan
+Message: Hejsanııııİİİİİİİİİİ
+currnet chat topic not empty
+Handling chat message
+Inside Handling chat message
+Pushing chat message to que
+Pushing chat message to quemessage: Hejsan
+Pushed chat message to que:message: Hejsan
+Handling chat message: message: Hejsan
+Message: Hejsanııııİİİİİİİİİİ
