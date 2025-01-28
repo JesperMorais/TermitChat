@@ -1,7 +1,7 @@
 # Project info
 This project aims to make a fully terminal driven chat written in c++.
 
-Currently Using ftxui for Terminal UX and MQTT for Communkation.
+Currently Using ftxui for Terminal UX and MQTT for communication.
 
 ## FOR DEVS - HOW TO BUILD PROJECT
 
