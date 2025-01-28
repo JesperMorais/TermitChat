@@ -30,4 +30,4 @@ extern vector<string> debug_messages;
 extern mutex debug_mutex;
 
 /// @brief hold the servers "unice" ID
-extern char serverID;
+extern string serverID;

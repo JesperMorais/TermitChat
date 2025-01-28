@@ -1,6 +1,11 @@
 # Lägg till exekverbara filer
 add_executable(client
     src/client_main.cpp
+    src/handle_uuid.cpp
+    src/handle_mqtt.cpp
+    src/global_params.cpp
+    src/menus/enter_name_menu.cpp
+    src/menus/menu_state.cpp
     # Lägg till andra källfiler här om det behövs
 )
 
@@ -15,10 +20,12 @@ target_link_libraries(client PRIVATE
     eclipse-paho-mqtt-c::paho-mqtt3c 
     eclipse-paho-mqtt-c::paho-mqtt3as 
     eclipse-paho-mqtt-c::paho-mqtt3cs
+    Boost::uuid
 )
 
 
 # Om du har egna inkluderingsfiler i 'includes'-katalogen
 target_include_directories(client PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/includes"
+    "${CMAKE_CURRENT_SOURCE_DIR}/includes/menus"
 )

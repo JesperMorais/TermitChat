@@ -89,6 +89,14 @@
         "xmemory": "cpp",
         "xtr1common": "cpp",
         "xtree": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "complex": "cpp",
+        "execution": "cpp",
+        "filesystem": "cpp",
+        "shared_mutex": "cpp",
+        "stdfloat": "cpp",
+        "typeindex": "cpp",
+        "*.ipp": "cpp",
+        "fstream": "cpp"
     }
 }

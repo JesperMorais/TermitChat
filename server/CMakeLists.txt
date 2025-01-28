@@ -2,7 +2,6 @@
 add_executable(server
     src/server_main.cpp
     src/debug.cpp
-    src/asio_task.cpp
     src/global_params.cpp
     src/mqtt_client.cpp
     # Lägg till andra källfiler här om det behövs
@@ -19,6 +18,7 @@ target_link_libraries(server PRIVATE
     eclipse-paho-mqtt-c::paho-mqtt3c 
     eclipse-paho-mqtt-c::paho-mqtt3as 
     eclipse-paho-mqtt-c::paho-mqtt3cs
+    Boost::uuid
 )
 
 # Om du har egna inkluderingsfiler i 'includes'-katalogen

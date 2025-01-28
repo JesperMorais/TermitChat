@@ -28,3 +28,4 @@ void publish_server_online(MQTTClient *client);
 
 /// @brief Tar han om MQTT servern.
 void mqtt_task();
+

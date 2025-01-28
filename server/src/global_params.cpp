@@ -1,5 +1,6 @@
 #include <iostream>
 #include "global_params.hpp"
+using namespace std;
 
 //string of input of user
 string input_content;
@@ -24,4 +25,4 @@ vector<string> debug_messages;
 mutex debug_mutex;
 
 /// @brief Holds the servers "unicue ID"
-char serverID;
+string serverID;

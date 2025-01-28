@@ -7,7 +7,6 @@
 #include <mutex>
 #include <queue>
 #include "debug.hpp"
-#include "asio_task.hpp"
 #include "global_params.hpp"
 #include "mqtt_client.hpp"
 #include <algorithm>
@@ -24,6 +23,7 @@ int main() {
         return 0;
     }
 
+    //TODO: ADD PASSWORD COMPATIBILITY
     // Step 1: Server Name Input Screen
     bool server_name_entered = false;
 
@@ -74,7 +74,10 @@ int main() {
         std::cerr << "Startup avbruten. Ingen server angiven." << std::endl;
         return -1;
     }
-
+    
+    //TODO:REWORK UI TO HAVE PROPPER SERVER UI 
+    //SHOW ACTIVE USERS
+    //CHANGE PASSWORD
     // Step 2: Main Chat UI
     auto input_box = Input(&input_content, "Skriv ditt meddelande...");
     auto send_button = Button("Skicka", [&] {
@@ -105,8 +108,8 @@ int main() {
         return vbox({
             text("TermitChat") | bold | borderStyled(Color::BlueViolet) | color(Color::Green3Bis) | center | flex | blink,
             separator(),
-            text("Ansluten till server: " + input_content_server_name) | bold | color(Color::Cyan),
-            text("Mottagna meddelanden: " + recv_data) | dim,
+            text("Hostar server: " + input_content_server_name) | bold | color(Color::Cyan),
+            text("Activa Clienter: david, Jesper") | dim | border | flex,
             separator(),
             container->Render(),
             separator(),
@@ -119,14 +122,14 @@ int main() {
 
     // Start networking tasks
     std::thread mqtt_thread(mqtt_task);
-    std::thread asio_thread(asio_task);
+    //std::thread asio_thread(asio_task);
 
     // Display the main UI
     screen.Loop(renderer);
 
-    // Wait for threads to finish
+
     mqtt_thread.join();
-    asio_thread.join();
+    //asio_thread.join();
 
     return 0;
 }
