@@ -3,6 +3,16 @@ This project aims to make a fully terminal driven chat written in c++.
 
 Currently Using ftxui for Terminal UX and MQTT for communication.
 
+### CURRENT BUILD SNEAK PEAK
+
+1/28/2025
+
+# Client
+![TermitchatClient](https://github.com/user-attachments/assets/c5db6be6-393d-41fd-a5be-7451cc089a17)
+
+# Server
+![TermitchatServer](https://github.com/user-attachments/assets/855b391c-6447-47e3-8ced-69695dc63c8b)
+
 ## FOR DEVS - HOW TO BUILD PROJECT
 
 ## SET `VCPKG_ROOT` ENV VERIBLE
@@ -77,14 +87,3 @@ TODO: ADD BETTER/EASIER WAY TO RUN EACH
 
 ### KNOWN ISSUES
 1. Opening the project and trying to build provides error. Fixed by rebuildning the build map
-
-### CURRENT BUILD SNEAK PEAK
-
-1/28/2025
-
-# Client
-![TermitchatClient](https://github.com/user-attachments/assets/c5db6be6-393d-41fd-a5be-7451cc089a17)
-
-# Server
-![TermitchatServer](https://github.com/user-attachments/assets/855b391c-6447-47e3-8ced-69695dc63c8b)
-
