@@ -3,6 +3,8 @@ This project aims to make a fully terminal driven chat written in c++.
 
 Currently Using ftxui for Terminal UX and MQTT for communication.
 
+The current version is only connecting to a localy hosted Broker. ( This will change later on)
+
 ### CURRENT BUILD SNEAK PEAK
 
 1/28/2025
