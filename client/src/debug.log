@@ -1,7 +1,7 @@
 MQTT Task started
 in Make server overview
-Client username set to: dd
-Client ID set to: cd153cce-f791-4fbf-853b-d1098f482071
+Client username set to: wa
+Client ID set to: 2ba5865c-66d9-4ee5-8c77-2c8097717f10
 MQTT client created
 0
 Connected to MQTT broker succecfully
@@ -10,109 +10,32 @@ Waiting for new server to subscribe to
 Subscribed to topic: /server/announcments/#
 MQTT yeild loop starting
 Handling server topic
-Adding server: wow to list
-Message: {server_name: wow, time_stamp: 2021-09-01 12:00:00}ıııı
-Trying to connect to server: wow
-Connected to server: wow
-Subscribing to server: wow
-Subscribed to topic: /server/wow/#
-made chat topic: /server/wow/chat
-Subscribed to topic: /server/wow/chat
-current chat define is now set to:/server/wow/chat
+Adding server: test to list
+Message: {server_name: test, time_stamp: 2021-09-01 12:00:00}ıııı7ËĞÉİ
+Trying to connect to server: test
+Connected to server: test
+Subscribing to server: test
+Subscribed to topic: /server/test/#
 Waiting for new server to subscribe to
+Message with token 3 delivered.
+currnet chat topic not empty
+Message: waııııİİÍ~É
+trying to send message: hh
+message not empty: hh
+calling on_connect
+got message: hh
+trying to send message: hh
+called on_connect successfully
+trying to send message: 
+no empty messages allowed
+MQTT: Sending message: hh
+MQTT: Message sent: wa: hh
+Message with token 4 delivered.
 currnet chat topic not empty
 Handling chat message
 Inside Handling chat message
 Pushing chat message to que
-Pushing chat message to quemessage: äloö
-Pushed chat message to que:message: äloö
-Handling chat message: message: äloö
-Message: äloöııııŞm’s
-currnet chat topic not empty
-Handling chat message
-Inside Handling chat message
-Pushing chat message to que
-Pushing chat message to quemessage: Hejsan -q 2
-Pushed chat message to que:message: Hejsan -q 2
-Handling chat message: message: Hejsan -q 2
-Message: Hejsan -q 2ııııİİİİİ
-currnet chat topic not empty
-Handling chat message
-Inside Handling chat message
-Pushing chat message to que
-Pushing chat message to quemessage: Hejsan
-Pushed chat message to que:message: Hejsan
-Handling chat message: message: Hejsan
-Message: Hejsanııııİİİİİİİİİİ
-currnet chat topic not empty
-Handling chat message
-Inside Handling chat message
-Pushing chat message to que
-Pushing chat message to quemessage: Hejsan
-Pushed chat message to que:message: Hejsan
-Handling chat message: message: Hejsan
-Message: Hejsanııııİİİİİİİİİİ
-currnet chat topic not empty
-Handling chat message
-Inside Handling chat message
-Pushing chat message to que
-Pushing chat message to quemessage: Hejsan
-Pushed chat message to que:message: Hejsan
-Handling chat message: message: Hejsan
-Message: Hejsanııııİİİİİİİİİİ
-currnet chat topic not empty
-Handling chat message
-Inside Handling chat message
-Pushing chat message to que
-Pushing chat message to quemessage: Hejsan
-Pushed chat message to que:message: Hejsan
-Handling chat message: message: Hejsan
-Message: Hejsanııııİİİİİİİİİİ
-currnet chat topic not empty
-Handling chat message
-Inside Handling chat message
-Pushing chat message to que
-Pushing chat message to quemessage: Hejsan
-Pushed chat message to que:message: Hejsan
-Handling chat message: message: Hejsan
-Message: Hejsanııııİİİİİİİİİİ
-currnet chat topic not empty
-Handling chat message
-Inside Handling chat message
-Pushing chat message to que
-Pushing chat message to quemessage: Hejsan
-Pushed chat message to que:message: Hejsan
-Handling chat message: message: Hejsan
-Message: Hejsanııııİİİİİİİİİİ
-currnet chat topic not empty
-Handling chat message
-Inside Handling chat message
-Pushing chat message to que
-Pushing chat message to quemessage: Hejsan
-Pushed chat message to que:message: Hejsan
-Handling chat message: message: Hejsan
-Message: Hejsanııııİİİİİİİİİİ
-currnet chat topic not empty
-Handling chat message
-Inside Handling chat message
-Pushing chat message to que
-Pushing chat message to quemessage: Hejsan
-Pushed chat message to que:message: Hejsan
-Handling chat message: message: Hejsan
-Message: Hejsanııııİİİİİİİİİİ
-currnet chat topic not empty
-Handling chat message
-Inside Handling chat message
-Pushing chat message to que
-Pushing chat message to quemessage: Hejsan
-Pushed chat message to que:message: Hejsan
-Handling chat message: message: Hejsan
-Message: Hejsanııııİİİİİİİİİİ
-currnet chat topic not empty
-Handling chat message
-Inside Handling chat message
-Pushing chat message to que
-Pushing chat message to quemessage: Hejsan
-Pushed chat message to que:message: Hejsan
-Handling chat message: message: Hejsan
-Message: Hejsanııııİİİİİİİİİİ
+Pushing chat message to quewa: hh
+Pushed chat message to que:wa: hh
+Handling chat message: wa: hh
+Message: wa: hhııııİİİİİİİİİİİİİİ–±KÉİ

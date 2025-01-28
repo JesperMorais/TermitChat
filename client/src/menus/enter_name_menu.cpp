@@ -81,9 +81,6 @@ Component MakeServerOverview(function<void(const string&)> on_connect) {
 
     return renderer;
 }
-
-
-
 // Funktion för att hämta aktuella meddelanden
 std::vector<std::string> GetChatMessages() {
     std::vector<std::string> messages;
@@ -108,17 +105,41 @@ ftxui::Component MakeChatBox() {
         return ftxui::vbox({
                    ftxui::text("Meddelanden") | ftxui::bold,
                    ftxui::separator(),
-                   ftxui::vbox(message_elements) | ftxui::border | ftxui::frame | ftxui::size(ftxui::HEIGHT, ftxui::EQUAL, 10),
+                   ftxui::vbox(message_elements) | ftxui::frame | ftxui::size(ftxui::HEIGHT, ftxui::EQUAL, 20),
                }) |
                ftxui::border | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 50);
     });
 }
 
-Component MakeServerDetails(const std::string* serverName, std::function<void()> on_connect) {
+string chat_input;
+
+Component MakeServerDetails(const std::string* serverName, std::function<void(const std::string&)> on_connect) {
     using namespace ftxui;
 
+    auto input = Input(&chat_input, "Skriv meddelande...");
+
     // Skapa en knapp med callback för att ansluta
-    auto connect_button = Button("Connect", on_connect);
+
+    // Skapa en knapp med callback för att ansluta
+    auto connect_button = Button("skicka", [=] {
+        std::string message = chat_input;
+        logfile << "trying to send message: " << message << std::endl;
+        if (!message.empty()) {
+            logfile << "message not empty: " << message << std::endl;
+            try {
+                logfile << "calling on_connect" << std::endl;
+                on_connect(message); // Pass by value or const reference
+                logfile << "called on_connect successfully" << std::endl;
+                chat_input = "";
+            } catch (const std::exception& e) {
+                logfile << "Exception caught: " << e.what() << std::endl;
+            } catch (...) {
+                logfile << "Unknown exception caught" << std::endl;
+            }
+        } else {
+            logfile << "no empty messages allowed" << std::endl;
+        }
+    });
 
     // Skapa meddelanderutan
     auto chat_box = MakeChatBox();
@@ -126,15 +147,18 @@ Component MakeServerDetails(const std::string* serverName, std::function<void()>
     // Skapa en container med vertikal layout
     auto container = Container::Vertical({
         connect_button,
+        input,
         chat_box, // Lägg till meddelanderutan här
     });
 
     // Renderer för att bygga utseendet på serverdetaljskärmen
     auto renderer = Renderer(container, [=] {
         return vbox({
-                   text("Server Details") | bold | center,
+                   text("Server") | bold | center | color(Color::Blue3Bis),
                    separator(),
-                   text("Server Name: " + *serverName) | center,
+                   text("Current Server: " + *serverName) | center | color(Color::Green3Bis) | blink | bold,
+                    separator(),
+                    input->Render() | border | center,
                    // Här kan du lägga till fler serverdetaljer vid behov
                    separator(),
                    connect_button->Render() | center,

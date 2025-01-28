@@ -49,6 +49,31 @@ TOPIC DEFINES HERE:
 
 */ 
 
+
+void send_message_task(void* params){
+    while(true){
+        if(sending_msg_que.empty()){
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            continue;
+        }else{
+            std::string message;
+            {
+                std::lock_guard<std::mutex> lock(sending_msg_mutex);
+                message = sending_msg_que.front();
+                sending_msg_que.pop();
+            }
+            logfile << "MQTT: Sending message: " << message << std::endl;
+            message = clientUsername + ": " + message;
+            int rc = MQTTClient_publish(mqttClient, CURRENT_SERVER_CHAT_TOPIC.c_str(), message.length(), message.c_str(), QOS, 0, NULL);
+            if (rc != MQTTCLIENT_SUCCESS) {
+                logfile << "MQTT: Failed to send message: " << message << std::endl;
+            }else{
+                logfile << "MQTT: Message sent: " << message << std::endl;
+            }
+        }
+    }
+}
+
 void sub_to_current_server_task(void* params){
     logfile << "Sub to current server task started" << std::endl;
     thread_params* parms = (thread_params*)params;
@@ -78,22 +103,14 @@ void sub_to_current_server_task(void* params){
         }
         logfile << "Subscribed to topic: " << topic << std::endl;
         CURRENT_SERVER_CHAT_TOPIC = SERVER_TOPIC_PREFIX + current_server_name + CHAT_PREFIX;
-        logfile << "made chat topic: " << CURRENT_SERVER_CHAT_TOPIC << std::endl;
-
-        rc = MQTTClient_subscribe(mqttClient, CURRENT_SERVER_CHAT_TOPIC.c_str(), QOS);
-        if (rc != MQTTCLIENT_SUCCESS) {
-            logfile << "Failed to subscribe to topic: " << CURRENT_SERVER_CHAT_TOPIC << std::endl;
-        }else{
-            logfile << "Subscribed to topic: " << CURRENT_SERVER_CHAT_TOPIC << std::endl;
-        }
-        logfile << "current chat define is now set to:" << CURRENT_SERVER_CHAT_TOPIC << std::endl;
+        string CURRENT_SERVER_CLIENTS_TOPIC = SERVER_TOPIC_PREFIX + current_server_name + "/clients";
+        rc = MQTTClient_publish(mqttClient, CURRENT_SERVER_CLIENTS_TOPIC.c_str(), clientUsername.length(), clientUsername.c_str(), QOS, 0, NULL);
     }
 }
 
 void handle_chat_messages(MQTTClient_message *message){
     logfile << "Inside Handling chat message" << std::endl;
     string paylod((char*)message->payload, message->payloadlen);
-    paylod = "message: " + paylod;
     //mutex que och lägg in data i que
     {
         logfile << "Pushing chat message to que" << std::endl;
@@ -167,7 +184,6 @@ void delivered(void *context, MQTTClient_deliveryToken dt) {
 }
 
 void mqtt_connect(){
-
         logfile << MQTTClient_setCallbacks(mqttClient, NULL, connlost, msgarrvd, delivered) << std::endl;
 
         MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
@@ -224,6 +240,9 @@ void mqtt_task(void* thread_para){
 
     thread sub_to_server(sub_to_current_server_task, parms);
     sub_to_server.detach();
+
+    thread send_message(send_message_task, parms);
+    send_message.detach();
 
     //this function subscribes to pre determined topics the user will beable to see / use
     subscribe_to_topic();

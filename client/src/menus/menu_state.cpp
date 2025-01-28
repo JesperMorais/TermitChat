@@ -59,8 +59,14 @@ int rund_app(void* params) {
         screen.PostEvent(ftxui::Event::Custom); //säger till att en uppdaterign skett vilket kommer köra renderingen igen
     });
 
-    auto server_details_menu = MakeServerDetails(&server_name_, [&]() {
-        app_state = AppState::InChat;
+    auto server_details_menu = MakeServerDetails(&server_name_, [&](const std::string& message) {
+        logfile << "got message: " << message << std::endl;
+        //skicka till mqtt
+        {
+            logfile << "trying to send message: " << message << std::endl;
+            std::lock_guard<std::mutex> lock(sending_msg_mutex);
+            sending_msg_que.push(message);
+        }
         screen.PostEvent(ftxui::Event::Custom);
     });
 
@@ -74,7 +80,7 @@ int rund_app(void* params) {
         },
         &current_tab
     );
-
+    
     //Main renderer, håller koll på vilken STATE vi är i samt ändrar TAB beroende på detta. Detta kommer i sin tur aktivera "tab container" som retunerar rätt komponent
     auto main_renderer = Renderer(tab_container, [&] {
         switch (app_state) {
