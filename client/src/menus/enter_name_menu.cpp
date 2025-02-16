@@ -5,22 +5,54 @@
 #include "global_params.hpp"
 using namespace ftxui;
 
+const std::vector <std::string> color_list = {"Blue", "Red", "White"};
+int selected_color = 0;
+std::string color_picked = color_list[selected_color];
 ftxui::Component MakeEnterNameMenu(string* input_content_client_name, string* client_name, function<void()> on_submit) {
+    
+    auto options = RadioboxOption{};
+    options.selected = &selected_color;
+    options.entries = ConstStringListRef(&color_list);
+
+    options.on_change= [] {
+        color_picked = color_list[selected_color];
+        logfile << "Color picked: " << color_picked << std::endl;
+    };
+
+    options.transform = [](const EntryState& state){
+      Color entry_color = Color::Default;
+
+        if (state.label == "Blue") entry_color = Color::Blue;
+        if (state.label == "Red") entry_color = Color::Red;
+        if (state.label == "White") entry_color = Color::White;
+
+        // Om markerad, gör texten fetstil + färgad
+        if (state.active) {
+            return text("> " + state.label) | bold | color(entry_color);
+        }
+        // Om inte markerad, använd bara färg
+        return text("  " + state.label) | color(entry_color);
+    };
+
+    auto color_list_menu = Radiobox(options);
     
     auto client_input = Input(input_content_client_name, "skriv namn...");
 
     auto client_button = Button("Fortsätt..", [=] {
         if(!input_content_client_name->empty()) {
             *client_name = *input_content_client_name;
+            logfile << "Client name set to: " << *client_name << std::endl;
+            logfile << "Color picked: " << color_picked << std::endl;
             on_submit();
         } else {
-            std::cout << "no empty username allowed" << std::endl;
+            logfile << "Client name is empty" << std::endl;
         }
     });
 
     auto container = Container::Vertical({
         client_input,
         client_button,
+        color_list_menu | color(Color::Green3Bis),
     });
 
    // Renderer för att skapa utseendet
@@ -28,9 +60,12 @@ ftxui::Component MakeEnterNameMenu(string* input_content_client_name, string* cl
         return vbox({
             text("Välkommen till Termit!") | bold | center | color(Color::Blue),
             separator(),
-            text("Ange client namn för att fortsätta:"),
+            text("Ange client namn för att fortsätta:") | bold | center,
             separator(),
             client_input->Render() | border,
+            separator(),
+            text("Välj färg för din client:") | bold | center | color(Color::BlueViolet),
+            color_list_menu->Render() | border,
             separator(),
             client_button->Render(),
             separator()
@@ -98,8 +133,18 @@ ftxui::Component MakeChatBox() {
     return ftxui::Renderer([&] {
         auto messages = GetChatMessages();
         std::vector<ftxui::Element> message_elements;
+        ftxui::Color client_color;
+        if(color_picked == "Blue"){
+            client_color = Color::BlueLight;
+        } else if(color_picked == "Red"){
+            client_color = Color::Red;
+        } else if(color_picked == "White"){
+            client_color = Color::White;
+        }else{
+            client_color = Color::Default;
+        }
         for (const auto& msg : messages) {
-            message_elements.push_back(ftxui::text(msg) | color(Color::Yellow2));
+            message_elements.push_back(ftxui::text(msg) | ftxui::color(client_color) | ftxui::vscroll_indicator);
         }
 
         return ftxui::vbox({

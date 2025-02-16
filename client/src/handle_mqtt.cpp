@@ -63,7 +63,7 @@ void send_message_task(void* params){
                 sending_msg_que.pop();
             }
             logfile << "MQTT: Sending message: " << message << std::endl;
-            message = clientUsername + ": " + message;
+            message = "<" + clientUsername + ">" + ": " + message;
             int rc = MQTTClient_publish(mqttClient, CURRENT_SERVER_CHAT_TOPIC.c_str(), message.length(), message.c_str(), QOS, 0, NULL);
             if (rc != MQTTCLIENT_SUCCESS) {
                 logfile << "MQTT: Failed to send message: " << message << std::endl;
