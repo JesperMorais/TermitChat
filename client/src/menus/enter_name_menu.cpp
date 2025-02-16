@@ -5,15 +5,14 @@
 #include "global_params.hpp"
 using namespace ftxui;
 
-const std::vector <std::string> color_list = {"Blue", "Red", "White"};
 int selected_color = 0;
-std::string color_picked = color_list[selected_color];
 ftxui::Component MakeEnterNameMenu(string* input_content_client_name, string* client_name, function<void()> on_submit) {
     
     auto options = RadioboxOption{};
     options.selected = &selected_color;
     options.entries = ConstStringListRef(&color_list);
 
+    //vid ändring av färg sätter vi den till vår valda färg
     options.on_change= [] {
         color_picked = color_list[selected_color];
         logfile << "Color picked: " << color_picked << std::endl;
@@ -167,14 +166,11 @@ ftxui::Component MakeChatBox() {
     });
 }
 
-string chat_input;
 
+string chat_input;
 Component MakeServerDetails(const std::string* serverName, std::function<void(const std::string&)> on_connect) {
-    using namespace ftxui;
 
     auto input = Input(&chat_input, "Skriv meddelande...");
-
-    // Skapa en knapp med callback för att ansluta
 
     // Skapa en knapp med callback för att ansluta
     auto connect_button = Button("skicka", [=] {

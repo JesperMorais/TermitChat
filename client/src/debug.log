@@ -1,10 +1,11 @@
 MQTT Task started
 in Make server overview
-Color picked: Blue
+Color picked: Red
+Color picked: Red
 Client name set to: Jesper
-Color picked: Blue
+Color picked: Red
 Client username set to: Jesper
-Client ID set to: 46e13821-944b-4bad-b09a-b5581e6cab5d
+Client ID set to: bbab677f-86f8-4652-9af9-c831a0fde7f7
 MQTT client created
 0
 Connected to MQTT broker succecfully
@@ -14,7 +15,7 @@ Subscribed to topic: /server/announcments/#
 MQTT yeild loop starting
 Handling server topic
 Adding server: JesperServer to list
-Message: {server_name: JesperServer, time_stamp: 2021-09-01 12:00:00}ýýýýÝÝÝÝ
+Message: {server_name: JesperServer, time_stamp: 2021-09-01 12:00:00}ýýýýÝÝÝÝÝÝÝÝÙmzÝ	
 Trying to connect to server: JesperServer
 Connected to server: JesperServer
 Subscribing to server: JesperServer
@@ -23,20 +24,20 @@ Waiting for new server to subscribe to
 Message with token 3 delivered.
 currnet chat topic not empty
 Message: JesperýýýýÝÝÝÝÝÝÝÝÝÝ
-trying to send message: Testing
-message not empty: Testing
+trying to send message: Jesper
+message not empty: Jesper
 calling on_connect
-got message: Testing
-trying to send message: Testing
+got message: Jesper
+trying to send message: Jesper
 called on_connect successfully
-MQTT: Sending message: Testing
-MQTT: Message sent: <Jesper>: Testing
+MQTT: Sending message: Jesper
+MQTT: Message sent: <Jesper>: Jesper
 Message with token 4 delivered.
 currnet chat topic not empty
 Handling chat message
 Inside Handling chat message
 Pushing chat message to que
-Pushing chat message to que<Jesper>: Testing
-Pushed chat message to que:<Jesper>: Testing
-Handling chat message: <Jesper>: Testing
-Message: <Jesper>: Testingýýýý
+Pushing chat message to que<Jesper>: Jesper
+Pushed chat message to que:<Jesper>: Jesper
+Handling chat message: <Jesper>: Jesper
+Message: <Jesper>: JesperýýýýÝÝÝÝ7Òu

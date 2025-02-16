@@ -19,5 +19,6 @@ extern std::queue<std::string> chat_que;
 extern std::mutex sending_msg_mutex;
 extern std::queue<std::string> sending_msg_que;
 
-
+extern const std::vector <std::string> color_list;
+extern std::string color_picked;
 extern const std::vector<ftxui::Color> clientColorList;

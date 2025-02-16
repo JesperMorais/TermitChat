@@ -23,3 +23,5 @@ enum clientColorChoices{
 
 //Color list for clients
 const std::vector<ftxui::Color> clientColorList = {ftxui::Color::Blue, ftxui::Color::Red, ftxui::Color::White};
+const std::vector <std::string> color_list = {"Blue", "Red", "White"};
+std::string color_picked = color_list[0];
