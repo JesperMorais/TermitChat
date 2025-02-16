@@ -1,9 +1,10 @@
 MQTT Task started
 in Make server overview
-Client name set to: wad
 Color picked: Blue
-Client username set to: wad
-Client ID set to: 25fbab36-3ada-4590-80b1-073480962301
+Client name set to: Jesper
+Color picked: Blue
+Client username set to: Jesper
+Client ID set to: 46e13821-944b-4bad-b09a-b5581e6cab5d
 MQTT client created
 0
 Connected to MQTT broker succecfully
@@ -13,7 +14,7 @@ Subscribed to topic: /server/announcments/#
 MQTT yeild loop starting
 Handling server topic
 Adding server: JesperServer to list
-Message: {server_name: JesperServer, time_stamp: 2021-09-01 12:00:00}ýýýýÝÝÝÝÝÝÝÝ»½jÝ
+Message: {server_name: JesperServer, time_stamp: 2021-09-01 12:00:00}ýýýýÝÝÝÝ
 Trying to connect to server: JesperServer
 Connected to server: JesperServer
 Subscribing to server: JesperServer
@@ -21,21 +22,21 @@ Subscribed to topic: /server/JesperServer/#
 Waiting for new server to subscribe to
 Message with token 3 delivered.
 currnet chat topic not empty
-Message: wadýýýýÝœr
-trying to send message: Jahopp
-message not empty: Jahopp
+Message: JesperýýýýÝÝÝÝÝÝÝÝÝÝ
+trying to send message: Testing
+message not empty: Testing
 calling on_connect
-got message: Jahopp
-trying to send message: Jahopp
+got message: Testing
+trying to send message: Testing
 called on_connect successfully
-MQTT: Sending message: Jahopp
-MQTT: Message sent: <wad>: Jahopp
+MQTT: Sending message: Testing
+MQTT: Message sent: <Jesper>: Testing
 Message with token 4 delivered.
 currnet chat topic not empty
 Handling chat message
 Inside Handling chat message
 Pushing chat message to que
-Pushing chat message to que<wad>: Jahopp
-Pushed chat message to que:<wad>: Jahopp
-Handling chat message: <wad>: Jahopp
-Message: <wad>: JahoppýýýýÝÝÝ
+Pushing chat message to que<Jesper>: Testing
+Pushed chat message to que:<Jesper>: Testing
+Handling chat message: <Jesper>: Testing
+Message: <Jesper>: Testingýýýý

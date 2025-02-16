@@ -133,6 +133,8 @@ ftxui::Component MakeChatBox() {
     return ftxui::Renderer([&] {
         auto messages = GetChatMessages();
         std::vector<ftxui::Element> message_elements;
+
+        // Välj färg beroende på vilken färg som valts
         ftxui::Color client_color;
         if(color_picked == "Blue"){
             client_color = Color::BlueLight;
@@ -143,8 +145,17 @@ ftxui::Component MakeChatBox() {
         }else{
             client_color = Color::Default;
         }
+
+        // Skapa en textelement för varje meddelande samt färgsätta client namnet
         for (const auto& msg : messages) {
-            message_elements.push_back(ftxui::text(msg) | ftxui::color(client_color) | ftxui::vscroll_indicator);
+            string client_name = msg.substr(0, msg.find(":"));
+            string message = msg.substr(msg.find(":") + 1);
+            message_elements.push_back(
+                hbox({
+                    text(client_name) | color(client_color) | bold,
+                    text(": " + message) | color(Color::Default),
+                })
+            );
         }
 
         return ftxui::vbox({
